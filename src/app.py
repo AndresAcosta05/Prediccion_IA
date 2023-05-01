@@ -8,9 +8,13 @@ from controllers.users_controller import UserController
 app = Flask(__name__)
 app.register_blueprint(users)
 
-@app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
+
+@app.route('/Nosotros')
+def Nosotros():
+    return render_template('Nosotros.html')
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
