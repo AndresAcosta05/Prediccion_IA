@@ -8,7 +8,7 @@ from controllers.users_controller import UserController
 app = Flask(__name__)
 app.register_blueprint(users)
 
-@app.route('/index')
+@app.route('/')
 def index():
     return render_template('index.html')
 
