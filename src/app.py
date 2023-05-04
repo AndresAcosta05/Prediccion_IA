@@ -38,20 +38,24 @@ def Nosotros():
     return render_template('Nosotros.html')
 
 @app.route('/Prediccion')
+@login_required
 def Prediccion():
     return render_template('Prediccion.html')
 
 @app.route('/Reporte')
+@login_required
 def Reporte():
     return render_template('Reporte.html')
 
 
 @app.route('/Gestion')
+@login_required
 def Gestion():
     return render_template('Gestion.html')
 
 
 @app.route('/Redneuronal')
+@login_required
 def Redneuronal():
     return render_template('Redneuronal.html')
 
@@ -59,39 +63,38 @@ def Redneuronal():
 def Contactenos():
     return render_template('Contactenos.html')
 
-
-
-
 @app.route('/login', methods=['POST', 'GET'])
 @cross_origin()
 def login():
-    # check if want the login
-    if request.method == 'GET':
-        return render_template('auth/login.html')
-    
     # check if try login
-    elif request.method == 'POST':
+    if request.method == 'POST':
         user = request.form['user']
         password = request.form['password']
         # check that the user exist
         response = UserController.check_user(user)
-        print(response)
         # check password
         if response:
             r = response if response.password == password else 'Contraseña incorrecta'
             if r != 'Contraseña incorrecta':
                 login_user(r)
+                # success
+                # return 2
+                return redirect(url_for('home'))
+            else:
+                # wrong password
+                # return 1
                 return redirect(url_for('home'))
         else:
-            print('No existe')
-        
-        return render_template('auth/login.html')
+            # no exist
+            # return 0
+            return redirect(url_for('home'))
     
 @app.route('/logout')
+@login_required
 @cross_origin()
 def logout():
     logout_user()
-    return redirect(url_for('login'))        
+    return redirect(url_for('home'))   
 
 def page_not_authorized(error):
     return "page not authorized"

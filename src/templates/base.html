@@ -59,6 +59,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/Nosotros" rel="nofollow" target="">Nosotros</a>
                         </li>
+                        {% if current_user.is_active %}
                         <li class="nav-item">
                             <a class="nav-link" href="/Prediccion" rel="nofollow" target="">Prediccion</a>
                         </li>
@@ -74,6 +75,7 @@
                             <a class="nav-link" href="/Redneuronal"
                                 rel="nofollow" target="">Red neuronal</a>
                         </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a class="nav-link" href="/Contactenos"
                                 target="">Contactenos</a>
@@ -101,17 +103,17 @@
                                         </div>
                                         <div class="modal-body">
 
-                                            <form>
+                                            <form action="/login" method="post">
                                                 <!-- Email input -->
                                                 <div class="form-outline mb-4">
-                                                    <input type="email" id="Passlogin" class="form-control" />
-                                                    <label class="form-label" for="form1Example1">Email address</label>
+                                                    <input type="text" id="Passlogin" class="form-control" name="user"/>
+                                                    <label class="form-label" for="form1Example1">Usuario</label>
                                                 </div>
 
                                                 <!-- Password input -->
                                                 <div class="form-outline mb-4">
-                                                    <input type="password" id="form1Example2" class="form-control" />
-                                                    <label class="form-label" for="form1Example2">Password</label>
+                                                    <input type="password" id="form1Example2" class="form-control" name="password"/>
+                                                    <label class="form-label" for="form1Example2">Contraseña</label>
                                                 </div>
 
                                                 <!-- 2 column grid layout for inline styling -->
@@ -134,6 +136,9 @@
 
                                                 <!-- Submit button -->
                                                 <button type="submit" class="btn btn-dark btn-block">Ingresar</button>
+                                            </form>
+                                            <form action="/logout">
+                                                <button type="submit" class="btn btn-dark btn-block">Salir</button>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
