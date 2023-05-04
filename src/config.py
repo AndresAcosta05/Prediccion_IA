@@ -1,21 +1,17 @@
-class Key:
-    SECRET_KEY = '9FSSbRHjf1JbMA7mO0rcCZ4PPTMbJoGm'
+import psycopg2
 
-class DevConfig(Key):
-    DEBUG = True
-    MYSQL_HOST = 'localhost'
-    MYSQL_USER = 'root'
-    MYSQL_PASSWORD = ''
-    MYSQL_DB = ''
-
-class ProdConfig(Key):
-    DEBUG = False
-    MYSQL_HOST = ''
-    MYSQL_USER = ''
-    MYSQL_PASSWORD = ''
-    MYSQL_DB = ''
-
-config = {
-    'development' : DevConfig,
-    'production': ProdConfig
-}
+class Connection:
+    
+    def getConnection():
+        try:
+            conn = psycopg2.connect(
+                host = 'db.jfanfdrjxxmgnzzylwvm.supabase.co',
+                user = 'postgres',
+                password = 'Supa1234Base5678',
+                port = 5432,
+                database = 'postgres'
+            )
+            return conn
+        except Exception as ex:
+            print(ex)
+            return None

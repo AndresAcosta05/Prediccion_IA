@@ -2,5 +2,8 @@
 {% block title %}Inicio{% endblock %}
 
 {% block body%}
-<h1>Hola mundo</h1>
+<h1>Hola {{ current_user.fullname }}</h1>
+{% if current_user.is_active %}
+<a class='btn btn-warning' href="{{ url_for('logout') }}">Salir</a>
+{% endif %}
 {% endblock %}
