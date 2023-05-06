@@ -105,13 +105,13 @@
                                             <form action="/login" method="post">
                                                 <!-- Email input -->
                                                 <div class="form-outline mb-4">
-                                                    <input type="username"  class="form-control" name="user" />
-                                                    <label class="form-label" for="form1Example1">Email </label>
+                                                    <input type="text" id="Passlogin" class="form-control" name="user"/>
+                                                    <label class="form-label" for="form1Example1">Usuario</label>
                                                 </div>
 
                                                 <!-- Password input -->
                                                 <div class="form-outline mb-4">
-                                                    <input type="password"  class="form-control" name="password"/>
+                                                    <input type="password" id="form1Example2" class="form-control" name="password"/>
                                                     <label class="form-label" for="form1Example2">Contraseña</label>
                                                 </div>
 
@@ -132,8 +132,9 @@
                                                         <a href="#!">Forgot password?</a>
                                                     </div>
                                                 </div>
+
                                                 <!-- Submit button -->
-                                                <button type="button" onclick="login()">  Ingresar </button>
+                                                <button type="submit" class="btn btn-dark btn-block">Ingresar</button>
                                             </form>
                                             <form action="/logout">
                                                 <button type="submit" class="btn btn-dark btn-block">Salir</button>
@@ -204,6 +205,6 @@
 <!--Footer-->
 
 <!-- Custom scripts -->
-<script type="text/javascript" src="{{url_for('static', filename= 'js/op.js')}}"></script>
+<script type="text/javascript" src="js/script.js"></script>
 
 </html>

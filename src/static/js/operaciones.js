@@ -1,27 +1,24 @@
 async function login(){
     let usuario , contraseña;
-    usuario = document.getElementsByName("user").value;
-    contraseña = document.getElementsByName("password").value;
+    usuario = document.getElementById("loginUsuario").value;
+    contraseña = document.getElementById("Passlogin").value;
 
 
     if(usuario && contraseña){
         var info = new FormData();
-        info.append('user', usuario)
-        info.append('password', contraseña)
+        info.append('loginUsuario', usuario)
+        info.append('Passlogin', contraseña)
         
 
         let fetchData = {
             method: 'POST',
-            body : info,
-            Headers: new Headers()
-            
+            body: data,
+            headers: new Headers()
         }
 
-        let data = await fetch('http://127.0.0.1:5000/login', fetchData)
+        let data = await fetch('url del api', fetchData)
         .then(res => res.json())
         .then(data => {
-
-            console.log(res)
 
         })
 
@@ -29,9 +26,4 @@ async function login(){
     } else{
         
     }
-
-
-
-
-
 }

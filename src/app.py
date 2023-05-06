@@ -1,5 +1,5 @@
 # librarys
-from flask import Flask, request, render_template, url_for, redirect
+from flask import Flask, request, render_template, url_for, redirect, jsonify
 from flask_login import LoginManager, login_required, logout_user, login_user
 from flask_cors import CORS, cross_origin
 # import configs and local resources
@@ -77,6 +77,7 @@ def login():
             r = response if response.password == password else 'Contraseña incorrecta'
             if r != 'Contraseña incorrecta':
                 login_user(r)
+<<<<<<< HEAD
            
                 # return 2
                 #return redirect(url_for('home'))
@@ -91,13 +92,22 @@ def login():
             # return 0
             #return redirect(url_for('home'))
              return 0
+=======
+                # success
+                return jsonify(str(2))
+            else:
+                # wrong password
+                return jsonify(str(1))
+        else:
+            # no exist
+            return jsonify(str(0))
+>>>>>>> c8ceefe09f6f49d7b2057cd0265a1a28fad59ca8
     
 @app.route('/logout')
 @login_required
 @cross_origin()
 def logout():
     logout_user()
-    return redirect(url_for('home'))   
 
 def page_not_authorized(error):
     return "page not authorized"
