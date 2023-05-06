@@ -77,17 +77,20 @@ def login():
             r = response if response.password == password else 'Contraseña incorrecta'
             if r != 'Contraseña incorrecta':
                 login_user(r)
-                # success
+           
                 # return 2
-                return redirect(url_for('home'))
+                #return redirect(url_for('home'))
+                return 2
             else:
                 # wrong password
-                # return 1
-                return redirect(url_for('home'))
+                
+                #return redirect(url_for('home'))
+                return 1
         else:
             # no exist
             # return 0
-            return redirect(url_for('home'))
+            #return redirect(url_for('home'))
+             return 0
     
 @app.route('/logout')
 @login_required

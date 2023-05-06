@@ -1,13 +1,13 @@
 async function login(){
     let usuario , contraseña;
-    usuario = document.getElementById("loginUsuario").value;
-    contraseña = document.getElementById("Passlogin").value;
+    usuario = document.getElementsByName("user").value;
+    contraseña = document.getElementsByName("password").value;
 
 
     if(usuario && contraseña){
         var info = new FormData();
-        info.append('loginUsuario', usuario)
-        info.append('Passlogin', contraseña)
+        info.append('user', usuario)
+        info.append('password', contraseña)
         
 
         let fetchData = {
@@ -17,9 +17,11 @@ async function login(){
             
         }
 
-        let data = await fetch('url del api', fetchData)
+        let data = await fetch('http://127.0.0.1:5000/login', fetchData)
         .then(res => res.json())
         .then(data => {
+
+            console.log(data)
 
         })
 

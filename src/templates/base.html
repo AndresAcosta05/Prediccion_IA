@@ -91,7 +91,7 @@
                                 <i>  <img src="{{ url_for('static', filename='img/usuario.png') }}" alt="" width="44" height="45"></i>
                             </button>
 
-                            <!-- Modal -->
+                            <!-- Modal  INICIO DE SESION EN PAGINA PRINCIPAL -->
                             <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
@@ -106,13 +106,13 @@
                                             <form action="/login" method="post">
                                                 <!-- Email input -->
                                                 <div class="form-outline mb-4">
-                                                    <input type="email" id="Passlogin" class="form-control" />
-                                                    <label class="form-label" for="form1Example1">Email address</label>
+                                                    <input type="username"  class="form-control" name="user" />
+                                                    <label class="form-label" for="form1Example1">Email </label>
                                                 </div>
 
                                                 <!-- Password input -->
                                                 <div class="form-outline mb-4">
-                                                    <input type="password" id="form1Example2" class="form-control" name="password"/>
+                                                    <input type="password"  class="form-control" name="password"/>
                                                     <label class="form-label" for="form1Example2">Contraseña</label>
                                                 </div>
 
@@ -133,9 +133,8 @@
                                                         <a href="#!">Forgot password?</a>
                                                     </div>
                                                 </div>
-
                                                 <!-- Submit button -->
-                                                <button type="submit" class="btn btn-dark btn-block">Ingresar</button>
+                                                <button type="button" onclick="login()">  Ingresar </button>
                                             </form>
                                             <form action="/logout">
                                                 <button type="submit" class="btn btn-dark btn-block">Salir</button>
@@ -204,9 +203,8 @@
     <!-- Copyright -->
 </footer>
 <!--Footer-->
-<!-- MDB -->
-<script type="text/javascript" src="js/mdb.min.js"></script>
+
 <!-- Custom scripts -->
-<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="{{url_for('static', filename= 'js/operaciones.js')}}"></script>
 
 </html>
