@@ -1,14 +1,12 @@
 async function login(){
     let usuario , contraseña;
-    usuario = document.getElementById("loginUsuario").value;
+    usuario = document.getElementById("Userlogin").value;
     contraseña = document.getElementById("Passlogin").value;
 
-
     if(usuario && contraseña){
-        var info = new FormData();
-        info.append('loginUsuario', usuario)
-        info.append('Passlogin', contraseña)
-        
+        data = new FormData();
+        data.append('user', usuario);
+        data.append('password', contraseña);
 
         let fetchData = {
             method: 'POST',
@@ -16,14 +14,25 @@ async function login(){
             headers: new Headers()
         }
 
-        let data = await fetch('url del api', fetchData)
-        .then(res => res.json())
-        .then(data => {
+        let response = await fetch('http://127.0.0.1:5000/login', fetchData)
+            .then(res => res.json())
+            .then(response => {
+                switch (response) {
+                    case '0':
+                        return redirect(url_for('home'))
+                    
+                    case '1':
+                        return redirect(url_for('home'))
 
-        })
-
-        
-    } else{
-        
+                
+                    case '2':
+                        location.href='http://127.0.0.1:5000/login';
+                    
+                }
+            })
+    }else{
+        if(usuario == "" || contraseña == ""){
+        alert('Campos vacios')
+        }
     }
 }

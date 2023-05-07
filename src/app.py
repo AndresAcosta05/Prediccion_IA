@@ -77,22 +77,6 @@ def login():
             r = response if response.password == password else 'Contraseña incorrecta'
             if r != 'Contraseña incorrecta':
                 login_user(r)
-<<<<<<< HEAD
-           
-                # return 2
-                #return redirect(url_for('home'))
-                return 2
-            else:
-                # wrong password
-                
-                #return redirect(url_for('home'))
-                return 1
-        else:
-            # no exist
-            # return 0
-            #return redirect(url_for('home'))
-             return 0
-=======
                 # success
                 return jsonify(str(2))
             else:
@@ -101,13 +85,13 @@ def login():
         else:
             # no exist
             return jsonify(str(0))
->>>>>>> c8ceefe09f6f49d7b2057cd0265a1a28fad59ca8
     
 @app.route('/logout')
 @login_required
 @cross_origin()
 def logout():
     logout_user()
+    render_template('index.html')
 
 def page_not_authorized(error):
     return "page not authorized"
