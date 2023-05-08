@@ -18,7 +18,7 @@ login_manager_app = LoginManager(app)
 #appling cors
 cors = CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5000"}})
 
-# routes for views
+# routes for viewsss    
 @login_manager_app.user_loader
 def load_user(id):
     return UserController.get_user_by_id(id)
@@ -79,6 +79,7 @@ def login():
                 login_user(r)
                 # success
                 return jsonify(str(2))
+                
             else:
                 # wrong password
                 return jsonify(str(1))
@@ -91,7 +92,7 @@ def login():
 @cross_origin()
 def logout():
     logout_user()
-    render_template('index.html')
+    return render_template('index.html')
 
 def page_not_authorized(error):
     return "page not authorized"

@@ -1,9 +1,15 @@
-async function login(){
-    let usuario , contraseña;
-    usuario = document.getElementById("Userlogin").value;
-    contraseña = document.getElementById("Passlogin").value;
+async function login() {
+    let usuario, contraseña;
+    usuario = document.getElementById("user").value;
+    contraseña = document.getElementById("password").value;
 
-    if(usuario && contraseña){
+
+    if (usuario == "" || contraseña == "") {
+        alert('Campos vacios')
+
+    } else {
+        (usuario && contraseña)
+
         data = new FormData();
         data.append('user', usuario);
         data.append('password', contraseña);
@@ -19,20 +25,24 @@ async function login(){
             .then(response => {
                 switch (response) {
                     case '0':
-                        return redirect(url_for('home'))
-                    
-                    case '1':
-                        return redirect(url_for('home'))
+                        alert('Usuario no existe');
+                        break;
 
-                
+                    case '1':
+                        alert('La contraseña incorrecta');
+                        break;
+
                     case '2':
-                        location.href='http://127.0.0.1:5000/login';
-                    
+                        alert('success');
+                      window.location.href='http://127.0.0.1:5000/home'     
+                      //window.location.assign('http://127.0.0.1:5000/home');
+
+                        break;
                 }
             })
-    }else{
-        if(usuario == "" || contraseña == ""){
-        alert('Campos vacios')
-        }
     }
+
 }
+
+
+
