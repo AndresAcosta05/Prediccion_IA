@@ -36,13 +36,11 @@ async function login() {
                         alert('success');
                       window.location.href='http://127.0.0.1:5000/home'     
                       //window.location.assign('http://127.0.0.1:5000/home');
-
+                      //window.location.assign('http://127.0.0.1:5000/home');
                         break;
                 }
             })
     }
 
 }
-
-
 
