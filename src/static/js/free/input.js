@@ -229,7 +229,7 @@ class Input {
   }
 
   _applyNotch() {
-    this._notchMiddle.style.width = `${this._labelWidth}px`;
+    this._notchMiddle.style.width = `${this._labelWidth + 9}px`;
     this._notchLeading.style.width = `${this._labelMarginLeft + 9}px`;
 
     if (this._label === null) return;

@@ -26,17 +26,17 @@ async function login() {
                 switch (response) {
                     case '0':
                         alert('Usuario no existe');
+                        window.location.assign('http://127.0.0.1:5000/home');
                         break;
 
                     case '1':
                         alert('La contraseña incorrecta');
+                         window.location.assign('http://127.0.0.1:5000/home');
                         break;
 
                     case '2':
                         alert('success');
                       window.location.href='http://127.0.0.1:5000/home'     
-                      //window.location.assign('http://127.0.0.1:5000/home');
-                      //window.location.assign('http://127.0.0.1:5000/home');
                         break;
                 }
             })

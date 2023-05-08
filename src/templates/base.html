@@ -93,6 +93,10 @@
                             </button>
 
                             <!-- Modal  INICIO DE SESION EN PAGINA PRINCIPAL -->
+
+                            <div>
+
+                          
                             <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
@@ -104,7 +108,7 @@
                                         </div>
                                         <div class="modal-body">
 
-                                            <form action="/login" method="post">
+                                            <form >
                                                 <!-- Email input -->
                                                 <div class="form-outline mb-4">
                                                     <input type="text" id="user" class="form-control" name="user"/>
@@ -136,12 +140,15 @@
                                                 </div>
 
                                                 <!-- Submit button -->
-                                                <button type="submit" class="btn btn-dark btn-block" onclick="login()">Ingresar</button>
+                                                <button type="button" class="btn btn-dark btn-block" onclick="login()">Ingresar</button>
                                             </form>
+                                            {% if current_user.is_active %}
                                             <form action="/logout">
                                                 <button type="submit" class="btn btn-dark btn-block">Salir</button>
                                             </form>
                                         </div>
+                                        {% endif %}
+                                        
                                         <div class="modal-footer">
                                             <button type="button" style="background-color: white;" class="btn btn-secondary" data-mdb-dismiss="modal">
                                                 Salir
@@ -151,8 +158,11 @@
                                     </div>
                                 </div>
                             </div>
-                            </a>
 
+                        </div>
+
+
+                        
                     </ul>
                 </div>
             </div>
