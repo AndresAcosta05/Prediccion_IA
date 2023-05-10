@@ -4,16 +4,25 @@ class UserController:
 
     @classmethod
     def check_user(self, user):
-        respuesta = UserModel.login_user(user=user)
-        if respuesta:
-            return respuesta
+        response = UserModel.login_user(user=user)
+        if response:
+            return response
         else:
             return None
     
     @classmethod
     def get_user_by_id(self, id):
-        respuesta = UserModel.get_by_id(id = id)
-        if respuesta:
-            return respuesta
+        response = UserModel.get_by_id(id = id)
+        if response:
+            return response
         else:
             return None
+    
+    @classmethod
+    def send_email_request(self, document, names, surnames, phone, email, affair):
+        response = UserModel.send_email_request(document, names, surnames, phone, email, affair)
+        if response:
+            return response
+        else:
+            return None
+            

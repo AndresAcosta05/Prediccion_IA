@@ -92,7 +92,6 @@ def login():
 @cross_origin()
 def logout():
     logout_user()
-    return render_template('index.html')
 
 def page_not_authorized(error):
     return "page not authorized"
