@@ -1,0 +1,69 @@
+#btnlogin {
+    margin-left: 40%;
+}
+
+#txtusuario {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#centrar{
+    margin-left: 40%;
+}
+
+#h4{
+    font-family: Copperplate;
+   
+}
+#perfil{
+    text-align: center;
+}
+#formcontactenos{
+    background-color: #d7d7b8;
+}
+
+#titulo{
+    text-align: center;
+}
+
+.green-border-focus .form-control:focus {
+    border: 1px solid brown;
+    box-shadow: 0 0 0 0.1rem #5d201d(139, 195, 74, .25);
+}
+
+
+
+#imagen{
+    margin-left: 20%;
+    margin-top: 10%;
+    border: 1px solid white;
+    border-radius: 4%;
+}
+
+#formulario{
+margin: auto;
+border-radius: 2%;
+    background-color: #1ca39e;
+    
+}
+#btnenviar{
+    margin-top: 5%;
+    margin-right: 69%;
+}
+
+#borrar{
+ padding-left: 30%;
+ margin-top: -10%;
+
+}
+#button{
+    margin-top: 5%;
+}
+
+#menu{
+
+    background-color: #1ca39e !important;
+}
+
+  
+
+ 

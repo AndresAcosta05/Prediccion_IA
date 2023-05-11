@@ -14,6 +14,9 @@
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/operaciones.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet" />
+
 
 
     <title>NOMBRE DE PROYECTO</title>
@@ -22,7 +25,9 @@
 <body>
     <!--Main Navigation-->
     <header>
+        
         <style>
+            
             #intro {
                 background-image: url("https://mdbootstrap.com/img/new/fluid/city/018.jpg");
                 height: 100vh;
@@ -31,19 +36,23 @@
             /* Height for devices larger than 576px */
             @media (min-width: 992px) {
                 #intro {
-                    margin-top: -58.59px;
+                    margin-top: -80.59px;
                 }
             }
 
-            .navbar .nav-link {
-                color: #fff !important;
-            }
-        </style>
 
+            .navbar .nav-link {
+                color: black !important;
+                background-color: transparent !important;
+            
+            }
+
+
+            
+        </style>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000; ">
+        <nav  id = "menu" class="navbar navbar-expand-lg navbar-light bg-primary" style="z-index: 2000;" >
             <div class="container-fluid">
-                <!-- Navbar brand -->
                 <a class="navbar-brand nav-link" target="_blank" href="https://mdbootstrap.com/docs/standard/">
                     <strong>LOGO</strong>
                 </a>
@@ -65,97 +74,107 @@
                             <a class="nav-link" href="/Prediccion" rel="nofollow" target="">Prediccion</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Reporte"
-                                rel="nofollow" target="">Reporte</a>
+                            <a class="nav-link" href="/Reporte" rel="nofollow" target="">Reporte</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Gestion"
-                                rel="nofollow" target="">Gestion de la Data</a>
+                            <a class="nav-link" href="/Gestion" rel="nofollow" target="">Gestion de la Data</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Redneuronal"
-                                rel="nofollow" target="">Red neuronal</a>
+                            <a class="nav-link" href="/Redneuronal" rel="nofollow" target="">Red neuronal</a>
                         </li>
                         {% endif %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/Contactenos"
-                                target="">Contactenos</a>
+                            <a class="nav-link" href="/Contactenos" target="">Contactenos</a>
                         </li>
                     </ul>
 
-                    <ul class="navbar-nav d-flex flex-row">
-                        <!-- Icons -->
+                    <ul class="navbar-nav d-flex flex-row">                    
                         <li class="nav-item me-3 me-lg-0">
-                            <!-- Button trigger modal -->
                             <button type="button" class="btn btn-secondary btn-floating btn-lg" data-mdb-toggle="modal"
                                 data-mdb-target="#myModal">
-                                <i>  <img src="{{ url_for('static', filename='img/usuario.png') }}" alt="" width="44" height="45"></i>
-                            </button>
+                                <i> <img src="{{ url_for('static', filename='img/usuario.png') }}" alt="" width="44"
+                                        height="45"></i>
+                            </button> 
 
-                            <!-- Modal  INICIO DE SESION EN PAGINA PRINCIPAL -->
-                            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="loginUsuario">Iniciar Sesion</h5>
-                                            <button type="button" class="btn-close" data-mdb-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
+        <!-- Modal  INICIO DE SESION EN PAGINA PRINCIPAL -->
+        {% if current_user.is_active %}
+        <div>
+            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="loginUsuario">Bienvenido</h5>
+                            <button type="button" class="btn-close" data-mdb-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
 
-                                            <form action="/login" method="post">
-                                                <!-- Email input -->
-                                                <div class="form-outline mb-4">
-                                                    <input type="text" id="user" class="form-control" name="user"/>
-                                                    <label class="form-label" for="form1Example1">Usuario</label>
-                                                </div>
-
-                                                <!-- Password input -->
-                                                <div class="form-outline mb-4">
-                                                    <input type="password" id="password" class="form-control" name="password"/>
-                                                    <label class="form-label" for="form1Example2">Contraseña</label>
-                                                </div>
-
-                                                <!-- 2 column grid layout for inline styling -->
-                                                <div class="row mb-4">
-                                                    <div class="col d-flex justify-content-center">
-                                                        <!-- Checkbox -->
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="form1Example3" checked />
-                                                            <label class="form-check-label" for="form1Example3">
-                                                                Remember me </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col">
-                                                        <!-- Simple link -->
-                                                        <a href="#!">Forgot password?</a>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Submit button -->
-                                                <button type="submit" class="btn btn-dark btn-block" onclick="login()">Ingresar</button>
-                                            </form>
-                                            <form action="/logout">
-                                                <button type="submit" class="btn btn-dark btn-block">Salir</button>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" style="background-color: white;" class="btn btn-secondary" data-mdb-dismiss="modal">
-                                                Salir
-                                            </button>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
+                            <div id="centrar">
+                                <img src="{{ url_for('static', filename='img/login.png') }}" alt="avatar" width="90 px"
+                                    height="90px">
                             </div>
-                            </a>
+                            <div id="perfil">
+                                <h4>{{ current_user.fullname }} </h4>
+                            </div>
+                            <br>
+                            <br>
 
-                    </ul>
+                            <form action="/logout">
+                                <button type="submit" class="btn btn-dark btn-block">Salir</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
+
             </div>
+
+            {% else %}
+            <div>
+                <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="loginUsuario">Iniciar Sesion</h5>
+                                <button type="button" class="btn-close" data-mdb-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="iniciosesion">
+                                    <!-- Email input -->
+                                    <div class="form">
+                                        <label class="form-label" for="form10Example3">Usuario</label>
+                                        <input type="text" id="user" class="form-control" />
+                                    </div>
+                                    <!-- Password input -->
+                                    <div class="form">
+                                        <label class="form-label" for="form10Example3">Contraseña</label>
+                                        <input type="password" id="password" class="form-control" />
+                                    </div>
+                                    <!-- 2 column grid layout for inline styling -->
+                                    <div class="row mb-4">
+                                        <div class="col d-flex justify-content-center">
+                                            <!-- Checkbox -->
+                                            <div id="button">
+                                                <button type="button" class="btn btn-dark btn-block"
+                                                    onclick="login()">Ingresar</button>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <!-- Submit button -->
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                {%endif%}
+                </li>
+                </ul>
+            </div>
+        </div>
         </nav>
 
     </header>
@@ -164,19 +183,7 @@
     {% endblock %}
 </body>
 <footer class="bg-light text-lg-start">
-    <div class="py-4 text-center">
-        <a role="button" class="btn btn-primary btn-lg m-2"
-            href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" rel="nofollow" target="_blank">
-            Learn Bootstrap 5
-        </a>
-        <a role="button" class="btn btn-primary btn-lg m-2" href="https://mdbootstrap.com/docs/standard/"
-            target="_blank">
-            Download MDB UI KIT
-        </a>
-    </div>
-
     <hr class="m-0" />
-
     <div class="text-center py-4 align-items-center" style="background-color: #D2D2D4;">
         <p>Siguenos en nuestras redes sociales</p>
         <a href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" class="btn btn-primary m-1" role="button"
