@@ -29,7 +29,6 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-
                                 <div id="centrar">
                                     <img src="{{ url_for('static', filename='img/login.png') }}" alt="avatar"
                                         width="90 px" height="90px">
@@ -46,76 +45,110 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm12 col-md-7">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First</th>
+                                    <th scope="col">Last</th>
+                                    <th scope="col">Handle</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">3</th>
+                                    <td colspan="2">Larry the Bird</td>
+                                    <td>@twitter</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            
+            </div>
+
+            {% else %}
+            <div class="container" id="titulo">
+                <div class="row">c
+                    <div class="col-lg-3 col-sm-3 col-md-3">
+                        <h1 class="display-4"> Ingrese sus datos</h1>
+                    </div>
+                </div>
+                <div class="row" id="formulario">
+                    <div class="col-lg-4 col-sm-4 col-md-4">
+                        <div class="form">
+                            <label class="form-label" for="form10Example3">Numero de Documento</label>
+                            <input type="number" id="NumeroDocumento" class="form-control" />
+                        </div>
+                        <div class="form">
+                            <label class="form-label" for="form10Example3">Nombre</label>
+                            <input type="text" id="Nombre" class="form-control" />
+                        </div>
+                        <div class="form">
+                            <label class="form-label" for="form10Example3">Apellido</label>
+                            <input type="text" id="Apellido" class="form-control" />
+                        </div>
+
+                        <div class="form">
+                            <label class="form-label" for="form10Example3">Ciudades</label>
+                            <select class="form-select" aria-label="Default select example" id="cmbCiudades">
+                                <option value="0">Barranquilla</option>
+                                <option value="1">Cartagena </option>
+                                <option value="2">Valledupar</option>
+                                <option value="3">Medellin</option>
+                                <option value="4">Bogota</option>
+                            </select>
+                        </div>
+                        <div class="form">
+                            <label class="form-label" for="form10Example3">Correo</label>
+                            <input type="email" id="Correo" pattern="@gmail.com" class="form-control" />
+                        </div>
+
+                        <div class="form">
+                            <label class="form-label" for="form10Example3">Numero de Telefono</label>
+                            <input type="number" id="NumeroTelefono" class="form-control" />
+                        </div>
+
+                        <div class="form-group green-border-focus">
+                            <label for="exampleFormControlTextarea5">Asunto</label>
+                            <textarea class="form-control" id="Asunto" rows="5"></textarea>
+                        </div>
+                        <div id="enviar">
+                            <button id="btnenviar" type="button" onclick="validacioncontactanos()"
+                                class="btn btn-success">Enviar</button>
+                        </div>
+                        <div id="borrar">
+                            <button id="btnborrar" type="button" class="btn btn-warning">Borrar Todo</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-md-6" id="operador">
+                        <img id="imagen" src="{{ url_for('static', filename='img/operador.png') }}" alt="operador"
+                            width="500 px" height="500px">
+                    </div>
+
 
                 </div>
 
-                {% else %}
+                {%endif%}
 
-
-                <main class="mt-5">
-                    <div class="container">
-                        <!--Section: Content-->
-
-                            <form>
-                                <!-- 2 column grid layout with text inputs for the first and last names -->
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <div class="form-outline">
-                                            <input type="text" id="form6Example1" class="form-control" />
-                                            <label class="form-label" for="form6Example1">First name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-outline">
-                                            <input type="text" id="form6Example2" class="form-control" />
-                                            <label class="form-label" for="form6Example2">Last name</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Text input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="form6Example3" class="form-control" />
-                                    <label class="form-label" for="form6Example3">Company name</label>
-                                </div>
-
-                                <!-- Text input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="form6Example4" class="form-control" />
-                                    <label class="form-label" for="form6Example4">Address</label>
-                                </div>
-
-                                <!-- Email input -->
-                                <div class="form-outline mb-4">
-                                    <input type="email" id="form6Example5" class="form-control" />
-                                    <label class="form-label" for="form6Example5">Email</label>
-                                </div>
-
-                                <!-- Number input -->
-                                <div class="form-outline mb-4">
-                                    <input type="number" id="form6Example6" class="form-control" />
-                                    <label class="form-label" for="form6Example6">Phone</label>
-                                </div>
-
-                                <!-- Message input -->
-                                <div class="form-outline mb-4">
-                                    <textarea class="form-control" id="form6Example7" rows="4"></textarea>
-                                    <label class="form-label" for="form6Example7">Additional information</label>
-                                </div>
-
-                                <!-- Checkbox -->
-                                <div class="form-check d-flex justify-content-center mb-4">
-                                    <input class="form-check-input me-2" type="checkbox" value="" id="form6Example8"
-                                        checked />
-                                    <label class="form-check-label" for="form6Example8"> Create an account? </label>
-                                </div>
-
-                                <!-- Submit button -->
-                                <button type="submit" class="btn btn-primary btn-block mb-4">Place order</button>
-                            </form>
-
-          
-                        <!--Section: Content-->
-{%endif%}
-
-                        {% endblock %}
+                {% endblock %}

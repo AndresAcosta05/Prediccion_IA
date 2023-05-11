@@ -17,3 +17,44 @@
 #perfil{
     text-align: center;
 }
+#formcontactenos{
+    background-color: #d7d7b8;
+}
+
+#titulo{
+    text-align: center;
+}
+
+.green-border-focus .form-control:focus {
+    border: 1px solid brown;
+    box-shadow: 0 0 0 0.1rem #5d201d(139, 195, 74, .25);
+}
+
+
+
+#imagen{
+    margin-left: 20%;
+    margin-top: 10%;
+    border: 1px solid white;
+    border-radius: 4%;
+}
+
+#formulario{
+margin: auto;
+border-radius: 2%;
+    background-color: #D2D2D4;
+    
+}
+#btnenviar{
+    margin-top: 5%;
+    margin-right: 69%;
+}
+
+#borrar{
+ padding-left: 30%;
+ margin-top: -10%;
+
+}
+#button{
+    margin-top: 5%;
+}
