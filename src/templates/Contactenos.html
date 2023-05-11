@@ -1,0 +1,157 @@
+{% extends './base.html' %}
+{% block body %}
+<div id="intro" class="bg-image shadow-2-strong"
+    style="background-image: url(https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?cs=srgb&dl=pexels-alex-knight-2599244.jpg&fm=jpg);">
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="container d-flex align-items-center justify-content-center text-center h-100">
+            <div class="text-white">
+                <h1 class="mb-3">Contactenos</h1>
+                <h5 class="mb-4">Ingrese sus datos para contactarlo</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Main layout-->
+<main class="mt-5">
+    <div class="container">
+        <!--Section: Content-->
+        <section>
+            {% if current_user.is_active %}
+            <div>
+                <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="loginUsuario">Bienvenido</h5>
+                                <button type="button" class="btn-close" data-mdb-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="centrar">
+                                    <img src="{{ url_for('static', filename='img/login.png') }}" alt="avatar"
+                                        width="90 px" height="90px">
+                                </div>
+                                <div id="perfil">
+                                    <h4>{{ current_user.fullname }} </h4>
+                                </div>
+                                <br>
+                                <br>
+
+                                <form action="/logout">
+                                    <button type="submit" class="btn btn-dark btn-block">Salir</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Calo</td>
+                                        <td>Quintero</td>
+                                        <td>Respondido</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Samir</td>
+                                        <td>Rojas</td>
+                                        <td>No respondido</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Andres</td>
+                                        <td>Acosta</td>
+                                        <td>No respondido</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="container" id="titulo">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-md-12">
+                        <h1 class="display-4"> Ingrese sus datos</h1>
+                    </div>
+                </div>
+                <div class="row" id="formulario">
+
+                    <div class="col-lg-4 col-sm-4 col-md-4">
+                        <br>
+                        <div class="form">
+                            <label class="form-label" for="form10Example3">Numero de Documento</label>
+                            <input type="number" id="NumeroDocumento" class="form-control" />
+                        </div>
+                        <div class="form">
+                            <label class="form-label" for="form10Example3">Nombre</label>
+                            <input type="text" id="Nombre" class="form-control" />
+                        </div>
+                        <div class="form">
+                            <label class="form-label" for="form10Example3">Apellido</label>
+                            <input type="text" id="Apellido" class="form-control" />
+                        </div>
+
+                        <div class="form">
+                            <label class="form-label" for="form10Example3">Ciudades</label>
+                            <select class="form-select" aria-label="Default select example" id="cmbCiudades">
+                                <option value="0">Barranquilla</option>
+                                <option value="1">Cartagena </option>
+                                <option value="2">Valledupar</option>
+                                <option value="3">Medellin</option>
+                                <option value="4">Bogota</option>
+                            </select>
+                        </div>
+                        <div class="form">
+                            <label class="form-label" for="form10Example3">Correo</label>
+                            <input type="email" id="Correo" pattern="@gmail.com" class="form-control" />
+                        </div>
+
+                        <div class="form">
+                            <label class="form-label" for="form10Example3">Numero de Telefono</label>
+                            <input type="number" id="NumeroTelefono" class="form-control" />
+                        </div>
+
+                        <div class="form-group green-border-focus">
+                            <label for="exampleFormControlTextarea5">Asunto</label>
+                            <textarea class="form-control" id="Asunto" rows="5"></textarea>
+                            <br>
+                        </div>
+                        <div id="enviar">
+                            <button id="btnenviar" type="button" onclick="validacioncontactanos()"
+                                class="btn btn-success">Enviar</button>
+                        </div>
+                        <div id="borrar">
+                            <button id="btnborrar" type="button" class="btn btn-warning">Borrar Todo</button>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-md-6" id="operador">
+                        <img id="imagen" src="{{ url_for('static', filename='img/operador.png') }}" alt="operador"
+                            width="500 px" height="500px">
+
+                    </div>
+
+
+                </div>
+
+                {%endif%}
+
+                {% endblock %}
