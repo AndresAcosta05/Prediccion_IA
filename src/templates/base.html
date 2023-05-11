@@ -25,7 +25,9 @@
 <body>
     <!--Main Navigation-->
     <header>
+        
         <style>
+            
             #intro {
                 background-image: url("https://mdbootstrap.com/img/new/fluid/city/018.jpg");
                 height: 100vh;
@@ -37,18 +39,20 @@
                     margin-top: -80.59px;
                 }
             }
-      /* Desktop menu */ @media all and (min-width: 900px) { .item { display: block; width: auto; } .toggle { display: none; } .logo { order: 0; } .item { order: 1; } .button { order: 2; } .menu li { padding: 15px 10px; } .menu li.button { padding-right: 0; } }
 
 
             .navbar .nav-link {
-                color: #fff !important;
+                color: black !important;
+                background-color: transparent !important;
+            
             }
-        </style>
 
+
+            
+        </style>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;  ">
+        <nav  id = "menu" class="navbar navbar-expand-lg navbar-light bg-primary" style="z-index: 2000;" >
             <div class="container-fluid">
-                <!-- Navbar brand -->
                 <a class="navbar-brand nav-link" target="_blank" href="https://mdbootstrap.com/docs/standard/">
                     <strong>LOGO</strong>
                 </a>
@@ -84,96 +88,93 @@
                         </li>
                     </ul>
 
-                    <ul class="navbar-nav d-flex flex-row">
-                        <!-- Icons -->
+                    <ul class="navbar-nav d-flex flex-row">                    
                         <li class="nav-item me-3 me-lg-0">
-                            <!-- Button trigger modal -->
                             <button type="button" class="btn btn-secondary btn-floating btn-lg" data-mdb-toggle="modal"
                                 data-mdb-target="#myModal">
                                 <i> <img src="{{ url_for('static', filename='img/usuario.png') }}" alt="" width="44"
                                         height="45"></i>
-                            </button>
+                            </button> 
 
-                            <!-- Modal  INICIO DE SESION EN PAGINA PRINCIPAL -->
-                            {% if current_user.is_active %}
-                            <div>
-                                <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="loginUsuario">Bienvenido</h5>
-                                                <button type="button" class="btn-close" data-mdb-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
+        <!-- Modal  INICIO DE SESION EN PAGINA PRINCIPAL -->
+        {% if current_user.is_active %}
+        <div>
+            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="loginUsuario">Bienvenido</h5>
+                            <button type="button" class="btn-close" data-mdb-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
 
-                                                <div id="centrar">
-                                                    <img src="{{ url_for('static', filename='img/login.png') }}"
-                                                        alt="avatar" width="90 px" height="90px">
-                                                </div>
-                                                <div id="perfil">
-                                                    <h4>{{ current_user.fullname }} </h4>
-                                                </div>
-                                                <br>
-                                                <br>
+                            <div id="centrar">
+                                <img src="{{ url_for('static', filename='img/login.png') }}" alt="avatar" width="90 px"
+                                    height="90px">
+                            </div>
+                            <div id="perfil">
+                                <h4>{{ current_user.fullname }} </h4>
+                            </div>
+                            <br>
+                            <br>
 
-                                                <form action="/logout">
-                                                    <button type="submit" class="btn btn-dark btn-block">Salir</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                {% else %}
-                                <div>
-                                    <div class="modal fade" id="myModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="loginUsuario">Iniciar Sesion</h5>
-                                                    <button type="button" class="btn-close" data-mdb-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="iniciosesion">
-                                                        <!-- Email input -->
-                                                        <div class="form">
-                                                            <label class="form-label" for="form10Example3">Usuario</label>
-                                                            <input type="text" id="user" class="form-control" />
-                                                        </div>
-                                                            <!-- Password input -->
-                                                            <div class="form">
-                                                                <label class="form-label" for="form10Example3">Contraseña</label>
-                                                                <input type="password" id="password" class="form-control" />
-                                                            </div>
-                                                                               <!-- 2 column grid layout for inline styling -->
-                                                        <div class="row mb-4">
-                                                            <div class="col d-flex justify-content-center">
-                                                                <!-- Checkbox -->
-                                                                <div id="button">
-                                                                    <button type="button" class="btn btn-dark btn-block"
-                                                                    onclick="login()">Ingresar</button>
-                                                            </div>
-                                                        <br>
-                                                        <br>
-                                                        <!-- Submit button -->
-                                                
-                                                        </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    {%endif%}
-                                </li>
-                    </ul>
+                            <form action="/logout">
+                                <button type="submit" class="btn btn-dark btn-block">Salir</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
+
             </div>
+
+            {% else %}
+            <div>
+                <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="loginUsuario">Iniciar Sesion</h5>
+                                <button type="button" class="btn-close" data-mdb-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="iniciosesion">
+                                    <!-- Email input -->
+                                    <div class="form">
+                                        <label class="form-label" for="form10Example3">Usuario</label>
+                                        <input type="text" id="user" class="form-control" />
+                                    </div>
+                                    <!-- Password input -->
+                                    <div class="form">
+                                        <label class="form-label" for="form10Example3">Contraseña</label>
+                                        <input type="password" id="password" class="form-control" />
+                                    </div>
+                                    <!-- 2 column grid layout for inline styling -->
+                                    <div class="row mb-4">
+                                        <div class="col d-flex justify-content-center">
+                                            <!-- Checkbox -->
+                                            <div id="button">
+                                                <button type="button" class="btn btn-dark btn-block"
+                                                    onclick="login()">Ingresar</button>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <!-- Submit button -->
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                {%endif%}
+                </li>
+                </ul>
+            </div>
+        </div>
         </nav>
 
     </header>
