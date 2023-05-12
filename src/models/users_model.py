@@ -1,5 +1,7 @@
 from config import Connection
 from models.entities.users import User
+from models.entities.email import Email_template
+from flask import jsonify
 
 
 class UserModel:
@@ -60,6 +62,21 @@ class UserModel:
             cursor.execute(sql)
             db.commit()
             return True
+        except Exception as ex:
+            print(ex)
+            return False
+    
+    @classmethod
+    def get_email_requests(self):
+        try:
+            with Connection.getConnection().cursor() as cursor:
+                sql = 'SELECT * FROM user_requests'
+                cursor.execute(sql)
+                data = []
+                for request in cursor.fetchall():
+                    data.append(request)
+                return data
+            
         except Exception as ex:
             print(ex)
             return False

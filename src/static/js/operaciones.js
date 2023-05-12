@@ -28,7 +28,7 @@ async function login() {
             headers: new Headers()
         }
 
-        let response = await fetch('http://127.0.0.1:5000/login', fetchData)
+        await fetch('http://127.0.0.1:5000/login', fetchData)
             .then(res => res.json())
             .then(response => {
                 switch (response) {
@@ -95,32 +95,59 @@ function validacioncorreo() {
 }
 
 
-function validacioncontactanos(){
-    var numerodoc= document.getElementById("NumeroDocumento").value;
-    var Nombre= document.getElementById("Nombre").value;
-    var Apellido= document.getElementById("Apellido").value;
-    var Correo= document.getElementById("Correo").value;
-    var NumeroTelefono = document.getElementById("NumeroTelefono").value;
-    var Asunto = document.getElementById("Asunto").value;
+async function validacioncontactanos(){
+    var _document= document.getElementById("NumeroDocumento").value;
+    var names= document.getElementById("Nombre").value;
+    var surnames= document.getElementById("Apellido").value;
+    var email = document.getElementById("Correo").value;
+    var phone = document.getElementById("NumeroTelefono").value;
+    var affair = document.getElementById("Asunto").value;
 
-    if(numerodoc ==""|| Nombre == "" || Apellido == "" || Correo =="" || NumeroTelefono =="" || Asunto =="" || validacioncorreo() == false){
+    if(_document != "" && names != "" && surnames != "" && email != "" && phone != "" && affair !="" && validacioncorreo() == true){
+        data = new FormData();
+        data.append('document', _document)
+        data.append('names', names)
+        data.append('surnames', surnames)
+        data.append('phone', phone)
+        data.append('email', email)
+        data.append('affair', affair)
+
+        let fetchData = {
+            method: 'POST',
+            body: data,
+            headers: new Headers()
+        }
+
+        await fetch('http://127.0.0.1:5000/send_request', fetchData)
+        .then(res => res.json())
+        .then(response => {
+            if(response) {
+                Swal.fire({
+                    html: `<h1>Registro Exitoso!</h1>
+                    <p>Se ha registrado su peticion</p>
+                    `,
+                });
+                // espacio para limpiar los campos
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ha habido un error',
+                    footer: '<p>Por favor vuelva a intentarlo</p>',
+                    container: 'myModal',
+                    
+                })
+            }
+        })
+    } else{
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Campos Vacios o incompletos',
-            footer: '<a href="">Necesitas ayuda?</a>',
+            footer: '<p>Verifica haber llenado todo</p>',
             container: 'myModal',
             
         })
-    }
- else{
-        Swal.fire({
-            html: `<h1>Registro Exitoso!</h1>
-            <p>Registro numero   <label id="numero"></label></p>
-            <br>
-            <a href="#">Necesitas ayuda?</a>
-            `,
-        });
     }
 
 
