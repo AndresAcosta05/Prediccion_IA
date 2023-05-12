@@ -34,32 +34,38 @@ def home():
     return render_template('index.html')
 
 @app.route('/Nosotros')
+@cross_origin()
 def Nosotros():
     return render_template('Nosotros.html')
 
 @app.route('/Prediccion')
 @login_required
+@cross_origin()
 def Prediccion():
     return render_template('Prediccion.html')
 
 @app.route('/Reporte')
 @login_required
+@cross_origin()
 def Reporte():
     return render_template('Reporte.html')
 
 
 @app.route('/Gestion')
 @login_required
+@cross_origin()
 def Gestion():
     return render_template('Gestion.html')
 
 
 @app.route('/Redneuronal')
 @login_required
+@cross_origin()
 def Redneuronal():
     return render_template('Redneuronal.html')
 
 @app.route('/Contactenos')
+@cross_origin()
 def Contactenos():
     return render_template('Contactenos.html')
 
