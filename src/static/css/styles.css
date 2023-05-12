@@ -6,22 +6,24 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-#centrar{
+#centrar {
     margin-left: 40%;
 }
 
-#h4{
+#h4 {
     font-family: Copperplate;
-   
+
 }
-#perfil{
+
+#perfil {
     text-align: center;
 }
-#formcontactenos{
+
+#formcontactenos {
     background-color: #d7d7b8;
 }
 
-#titulo{
+#titulo {
     text-align: center;
 }
 
@@ -32,38 +34,79 @@
 
 
 
-#imagen{
+#imagen {
     margin-left: 20%;
     margin-top: 10%;
     border: 1px solid white;
     border-radius: 4%;
 }
 
-#formulario{
-margin: auto;
-border-radius: 2%;
+#formulario {
+    margin: auto;
+    border-radius: 2%;
     background-color: #1ca39e;
-    
+
 }
-#btnenviar{
+
+#btnenviar {
     margin-top: 5%;
     margin-right: 69%;
 }
 
-#borrar{
- padding-left: 30%;
- margin-top: -10%;
+#borrar {
+    padding-left: 30%;
+    margin-top: -10%;
 
 }
-#button{
+
+#button {
     margin-top: 5%;
 }
 
-#menu{
+#menu {
 
     background-color: #1ca39e !important;
 }
 
-  
 
- 
+#predic1 {
+    border-radius: 10%;
+    border: solid 1px;
+    color: #1ca39e;
+
+}
+
+#p {
+    text-align: justify;
+}
+
+#p1 {
+    padding-top: 7%;
+}
+
+#img1 {
+    padding-top: 8%;
+}
+
+#img2 {
+    height: auto;
+    width: 250px;
+}
+
+#p2 {
+    text-align: justify;
+}
+
+#p3 {
+    text-align: justify;
+
+}
+
+#img3 {
+    height: auto;
+    width: 440px;
+}
+
+#title {
+    padding-top: 13%;
+}

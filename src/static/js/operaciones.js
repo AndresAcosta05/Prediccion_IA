@@ -126,4 +126,37 @@ function validacioncontactanos(){
 
 }
 
+function tablausuarios() {
+    let user;
+    let infoForm={};
+
+
+  let response  = ['Samir','Rojas','Respondido'];
+
+
+
+    for(let x in response.data){
+        infoForm["NOMBRE"] = response.data[x].NOMBRE    
+
+        alert(response.data[x])
+
+
+
+        
+    
+
+      
+      tabla = document.getElementById("cuerpoclientes");
+      filanueva = tabla.insertRow(tabla.length);
+
+      cell1 = filanueva.insertCell(1);
+      cell1.innerHTML = infoForm.NOMBRE;
+      alert(NOMBRE)
+
+
+    }
+
+  
+
+}
 
