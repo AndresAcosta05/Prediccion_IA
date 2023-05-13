@@ -73,9 +73,7 @@ async function login() {
                 }
             })
     }
-
 }
-
 
 function validacioncorreo() {
     var emailField = document.getElementById('Correo');
@@ -88,22 +86,26 @@ function validacioncorreo() {
             title: 'Oops...',
             text: 'Ingrese un correo valido',
             footer: '<a href="">Necesitas ayuda?</a>',
-    
+
         })
         return false;
     }
 }
+function borrar() {
+    var formulario = document.getElementById("formulario1");
+    formulario.reset();
 
 
-async function validacioncontactanos(){
-    var _document= document.getElementById("NumeroDocumento").value;
-    var names= document.getElementById("Nombre").value;
-    var surnames= document.getElementById("Apellido").value;
+}
+async function validacioncontactanos() {
+    var _document = document.getElementById("NumeroDocumento").value;
+    var names = document.getElementById("Nombre").value;
+    var surnames = document.getElementById("Apellido").value;
     var email = document.getElementById("Correo").value;
     var phone = document.getElementById("NumeroTelefono").value;
     var affair = document.getElementById("Asunto").value;
 
-    if(_document != "" && names != "" && surnames != "" && email != "" && phone != "" && affair !="" && validacioncorreo() == true){
+    if (_document != "" && names != "" && surnames != "" && email != "" && phone != "" && affair != "" && validacioncorreo() == true) {
         data = new FormData();
         data.append('document', _document)
         data.append('names', names)
@@ -119,71 +121,56 @@ async function validacioncontactanos(){
         }
 
         await fetch('http://127.0.0.1:5000/send_request', fetchData)
-        .then(res => res.json())
-        .then(response => {
-            if(response) {
-                Swal.fire({
-                    html: `<h1>Registro Exitoso!</h1>
+            .then(res => res.json())
+            .then(response => {
+                if (response) {
+                    Swal.fire({
+                        html: `<h1>Registro Exitoso!</h1>
                     <p>Se ha registrado su peticion</p>
                     `,
-                });
-                // espacio para limpiar los campos
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Ha habido un error',
-                    footer: '<p>Por favor vuelva a intentarlo</p>',
-                    container: 'myModal',
-                    
-                })
-            }
-        })
-    } else{
+                    });
+                    borrar()
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Ha habido un error',
+                        footer: '<p>Por favor vuelva a intentarlo</p>',
+                        container: 'myModal',
+
+                    })
+                }
+            })
+    } else {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Campos Vacios o incompletos',
             footer: '<p>Verifica haber llenado todo</p>',
             container: 'myModal',
-            
+
         })
     }
-
-
 }
 
-function tablausuarios() {
-    let user;
-    let infoForm={};
+async function tablausuarios() {
+    var tabla = " <tr> <th >#</th> <th >CEDULA</th> <th>NOMBRE</th> <th >APELLIDOS</th> <th >NUMERO DE TELEFONO</th> <th>CORREO</th> <th>ASUNTO</th> <th >OPCIONES</th> </tr>";
+    const response = await fetch('http://127.0.0.1:5000/get_email_request')
+        .then(res => res.json())
+        .then(response => {
+            for (let x in response) {
+            
 
 
-  let response  = ['Samir','Rojas','Respondido'];
+            }
+ 
 
 
-
-    for(let x in response.data){
-        infoForm["NOMBRE"] = response.data[x].NOMBRE    
-
-        alert(response.data[x])
-
-
-
-        
-    
-
-      
-      tabla = document.getElementById("cuerpoclientes");
-      filanueva = tabla.insertRow(tabla.length);
-
-      cell1 = filanueva.insertCell(1);
-      cell1.innerHTML = infoForm.NOMBRE;
-      alert(NOMBRE)
-
-
-    }
-
-  
-
+        })
 }
+
+
+
+
+
 
