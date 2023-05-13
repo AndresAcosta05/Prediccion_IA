@@ -154,7 +154,7 @@ async function validacioncontactanos(){
 }
 
 function tablausuarios() {
-    let user;
+
     let infoForm={};
 
 
