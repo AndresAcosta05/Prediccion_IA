@@ -1,20 +1,49 @@
 {% extends './base.html' %}
 {% block body %}
-<div id="intro" class="bg-image shadow-2-strong">
-    <div class="mask" style="background-color: rgba(0, 0, 0, 0.8);">
-      <div class="container d-flex align-items-center justify-content-center text-center h-100">
-        <div class="text-white">
-          <h1 class="mb-3">Red neuronal</h1>
-          <h5 class="mb-4">pequeña descripcion</h5>
-          <a class="btn btn-outline-light btn-lg m-2" href="https://www.youtube.com/watch?v=c9B4TPnak1A" role="button"
-            rel="nofollow" target="_blank">Mas info</a>
-          <a class="btn btn-outline-light btn-lg m-2" href="https://mdbootstrap.com/docs/standard/" target="_blank"
-            role="button">Algo maas</a>
-        </div>
+<div id="intro" class="bg-image shadow-2-strong"
+  style="background-image: url(https://fotografias.antena3.com/clipping/cmsimages01/2023/02/16/D63607C7-330A-49E4-87DA-0B9A326CB93A/inteligencia-artificial-redes-neuronales_98.jpg?crop=1355,762,x0,y0&width=1900&height=1069&optimize=low&format=webply);">
+  <div class="mask" style="background-color: rgba(0, 0, 0, 0.8);">
+    <div class="container d-flex align-items-center justify-content-center text-center h-100">
+      <div class="text-white">
+        <h1 class="mb-3">Red neuronal</h1>
+        <h5 class="mb-4">Las redes neuronales artificiales son un modelo computacional evolucionado a partir de diversas
+          aportaciones científicas que están registradas en la historia.​ </h5>
       </div>
     </div>
   </div>
 </div>
+
+<div class="container" id="red">
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12">
+      <h5 class="display-4">Convertir de Farenheit a Grados Celcius</h5>
+    </div>
+  </div>
+</div>
+<div class="container" id="red1">
+  <div class="row">
+    <div class="col-lg-4col-sm-4 col-md-4">
+      <div>
+        <label>Farenheit</label>
+        <input id = "inputfarenheit"type="number">
+      </div>
+    </div>
+
+      <div class="col-lg-4col-sm-4 col-md-4">
+        <div>
+          <label>Celcius</label>
+          <label id="resultado" for=""></label>
+        </div>
+      </div>
+
+
+      <div class="col-lg-4col-sm-4 col-md-4">
+        <div>
+          <button class="btn btn-success" id="convertir"> Convertir</button>
+        </div>
+      </div>
+    </div>
+
 
 
 {% endblock %}
