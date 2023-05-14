@@ -202,6 +202,13 @@ async function validacioncontactanos() {
                     cell8.innerHTML = `<a class="btn btn-warning mx-2 " onClick="onEdit(this)">Edit</a>
                 <a class= "btn btn-danger "onClick="onDelete02(this)">Delete</a>`;    
                 }
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Usuarios Cargados!',
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
     
 
 
