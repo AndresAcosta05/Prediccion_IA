@@ -153,30 +153,58 @@ async function validacioncontactanos() {
     }
 }
 
-<<<<<<< HEAD
-function tablausuarios() {
+    async function tablausuarios() {
+        let infoForm = {};
+        await fetch('http://127.0.0.1:5000/get_email_request')
+            .then(res => res.json())
+            .then(response => {
+                for (let x in response) {
+                
+                    infoForm["ID"] = response[x][0];   
+                    infoForm["CEDULA"] = response[x][1];  
+                    infoForm["NOMBRE"] = response[x][2];
+                    infoForm["APELLIDOS"] = response[x][3];  
+                    infoForm["NUMEROTELEFONO"] = response[x][4];  
+                    infoForm["CORREO"] = response[x][5];
+                    infoForm["ASUNTO"] = response[x][6];    
 
-    let infoForm={};
-=======
-async function tablausuarios() {
-    var tabla = " <tr> <th >#</th> <th >CEDULA</th> <th>NOMBRE</th> <th >APELLIDOS</th> <th >NUMERO DE TELEFONO</th> <th>CORREO</th> <th>ASUNTO</th> <th >OPCIONES</th> </tr>";
-    const response = await fetch('http://127.0.0.1:5000/get_email_request')
-        .then(res => res.json())
-        .then(response => {
-            for (let x in response) {
-            
->>>>>>> 7d5c7c3809f9f99a22157c366480d6644ac470c2
-
-
-            }
- 
-
-
-        })
-}
+                    document.getElementById("tablaclientes").style.display = "block";
+                    document.getElementById("cuerpoclientes").innerHTML += "";
 
 
+                    tabla = document.getElementById("cuerpoclientes");
+                    filanueva = tabla.insertRow(tabla.length);
+
+                    cell1 = filanueva.insertCell(0);
+                    cell1.innerHTML = infoForm.ID;
+
+                    cell1 = filanueva.insertCell(1);
+                    cell1.innerHTML = infoForm.CEDULA;
+
+                    cell1 = filanueva.insertCell(2);
+                    cell1.innerHTML = infoForm.NOMBRE;
+
+                    cell1 = filanueva.insertCell(3);
+                    cell1.innerHTML = infoForm.APELLIDOS;
+
+                    
+                    cell1 = filanueva.insertCell(4);
+                    cell1.innerHTML = infoForm.NUMEROTELEFONO;
+
+                    
+                    cell1 = filanueva.insertCell(5);
+                    cell1.innerHTML = infoForm.CORREO;
+
+                    cell1 = filanueva.insertCell(6);
+                    cell1.innerHTML = infoForm.ASUNTO;
+
+                    cell8 = filanueva.insertCell(7);
+                    cell8.innerHTML = `<a class="btn btn-warning mx-2 " onClick="onEdit(this)">Edit</a>
+                <a class= "btn btn-danger "onClick="onDelete02(this)">Delete</a>`;    
+                }
+    
 
 
-
+            })
+    }
 
