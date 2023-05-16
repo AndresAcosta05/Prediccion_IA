@@ -5,12 +5,14 @@ from flask_cors import CORS, cross_origin
 # import configs and local resources
 # from config import config
 from routes.user_routes import users
+from routes.ml_routes import machine_learning
 from controllers.users_controller import UserController
 
 app = Flask(__name__)
 # configuring the app
 app.secret_key = '9FSSbRHjf1JbMA7mO0rcCZ4PPTMbJoGm'
 app.register_blueprint(users)
+app.register_blueprint(machine_learning)
 
 # loading login manager
 login_manager_app = LoginManager(app)
