@@ -153,58 +153,90 @@ async function validacioncontactanos() {
     }
 }
 
-    async function tablausuarios() {
-        let infoForm = {};
-        await fetch('http://127.0.0.1:5000/get_email_request')
-            .then(res => res.json())
-            .then(response => {
-                for (let x in response) {
-                
-                    infoForm["ID"] = response[x][0];   
-                    infoForm["CEDULA"] = response[x][1];  
-                    infoForm["NOMBRE"] = response[x][2];
-                    infoForm["APELLIDOS"] = response[x][3];  
-                    infoForm["NUMEROTELEFONO"] = response[x][4];  
-                    infoForm["CORREO"] = response[x][5];
-                    infoForm["ASUNTO"] = response[x][6];    
+async function tablausuarios() {
+    let infoForm = {};
+    await fetch('http://127.0.0.1:5000/get_email_request')
+        .then(res => res.json())
+        .then(response => {
+            for (let x in response) {
 
-                    document.getElementById("tablaclientes").style.display = "block";
-                    document.getElementById("cuerpoclientes").innerHTML += "";
+                infoForm["ID"] = response[x][0];
+                infoForm["CEDULA"] = response[x][1];
+                infoForm["NOMBRE"] = response[x][2];
+                infoForm["APELLIDOS"] = response[x][3];
+                infoForm["NUMEROTELEFONO"] = response[x][4];
+                infoForm["CORREO"] = response[x][5];
+                infoForm["ASUNTO"] = response[x][6];
+
+                document.getElementById("tablaclientes").style.display = "block";
+                document.getElementById("cuerpoclientes").innerHTML += "";
 
 
-                    tabla = document.getElementById("cuerpoclientes");
-                    filanueva = tabla.insertRow(tabla.length);
+                tabla = document.getElementById("cuerpoclientes");
+                filanueva = tabla.insertRow(tabla.length);
 
-                    cell1 = filanueva.insertCell(0);
-                    cell1.innerHTML = infoForm.ID;
+                cell1 = filanueva.insertCell(0);
+                cell1.innerHTML = infoForm.ID;
 
-                    cell1 = filanueva.insertCell(1);
-                    cell1.innerHTML = infoForm.CEDULA;
+                cell1 = filanueva.insertCell(1);
+                cell1.innerHTML = infoForm.CEDULA;
 
-                    cell1 = filanueva.insertCell(2);
-                    cell1.innerHTML = infoForm.NOMBRE;
+                cell1 = filanueva.insertCell(2);
+                cell1.innerHTML = infoForm.NOMBRE;
 
-                    cell1 = filanueva.insertCell(3);
-                    cell1.innerHTML = infoForm.APELLIDOS;
+                cell1 = filanueva.insertCell(3);
+                cell1.innerHTML = infoForm.APELLIDOS;
 
+
+                cell1 = filanueva.insertCell(4);
+                cell1.innerHTML = infoForm.NUMEROTELEFONO;
+
+
+                cell1 = filanueva.insertCell(5);
+                cell1.innerHTML = infoForm.CORREO;
+
+                cell1 = filanueva.insertCell(6);
+                cell1.innerHTML = infoForm.ASUNTO;
+
+                cell8 = filanueva.insertCell(7);
+                cell8.innerHTML = ` <button type="button" onclick = "abrir(this)" class="btn - btn-success" data-open="modal1">...</button>
+                    <div class="modal" id="modal1">
+                      <div class="modal-dialog">
+                        <header class="modal-header">
+                          <h1 id="title" class= "display-4">Respuestas </h1>
+                          <button onclick = "cerrar(this)" class="close-modal" aria-label="close modal" data-close>✕</button>
+                        </header>
+                        <section class="modal-content">MODL LISTO</section>
+                        <footer class="modal-footerMODAAL FOOTERfooter>
+                      </div>
+                    </div>
                     
-                    cell1 = filanueva.insertCell(4);
-                    cell1.innerHTML = infoForm.NUMEROTELEFONO;
+                    `;
+            }
 
-                    
-                    cell1 = filanueva.insertCell(5);
-                    cell1.innerHTML = infoForm.CORREO;
+        })
+}
 
-                    cell1 = filanueva.insertCell(6);
-                    cell1.innerHTML = infoForm.ASUNTO;
-
-                    cell8 = filanueva.insertCell(7);
-                    cell8.innerHTML = `<a class="btn btn-warning mx-2 " onClick="onEdit(this)">Edit</a>
-                <a class= "btn btn-danger "onClick="onDelete02(this)">Delete</a>`;    
-                }
-    
-
-
-            })
+function abrir() {
+    const openEls = document.querySelectorAll("[data-open]");
+    const isVisible = "is-visible";
+    for (const el of openEls) {
+        el.addEventListener("click", function () {
+            const modalId = this.dataset.open;
+            document.getElementById(modalId).classList.add(isVisible);
+        });
     }
+    document.addEventListener("click", e => {
+        if (e.target == document.querySelector(".modal.is-visible")) {
+            document.querySelector(".modal.is-visible").classList.remove(isVisible);
+        }
+    });
 
+    document.addEventListener("keyup", e => {
+        if (e.key == "Escape" && document.querySelector(".modal.is-visible")) {
+            document.querySelector(".modal.is-visible").classList.remove(isVisible);
+        }
+    });
+
+
+}
