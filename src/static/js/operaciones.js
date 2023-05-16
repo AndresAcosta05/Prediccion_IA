@@ -241,6 +241,36 @@ function abrir() {
 
 }
 
-function redneuronal(){
+async function redneuronal() {
+    let inputcelcius = document.getElementById("inputcelcius").value;
+
+    var info = new FormData();
+    info.append('grados', inputcelcius)
+
+    let fetchData = {
+        method: 'POST',
+        body: info,
+        headers: new Headers()
+    }
+
+    let data = await fetch('http://127.0.0.1:5000/red_neuronal', fetchData)
+        .then(res => res.json())
+        .then(data => {
+            for (let x in data) {
+                document.getElementById("inputfarenheit").value = data[x];
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Conversion exitosa!',
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+
+
+            }
+
+
+        })
+
+
 
 }
