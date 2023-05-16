@@ -199,14 +199,14 @@ async function tablausuarios() {
                 cell1.innerHTML = infoForm.ASUNTO;
 
                 cell8 = filanueva.insertCell(7);
-                cell8.innerHTML = ` <button type="button" onclick = "abrir(this)" class="btn - btn-success" data-open="modal1">...</button>
-                    <div class="modal" id="modal1">
+                cell8.innerHTML = ` <button type="button" onclick = "abrir(this)" class="btn - btn-success" data-open="modal">...</button>
+                    <div class="modal" id="modal">
                       <div class="modal-dialog">
                         <header class="modal-header">
-                          <h1 id="title" class= "display-4">Respuestas </h1>
+                          <h1 id="title">Respuestas </h1>
                           <button onclick = "cerrar(this)" class="close-modal" aria-label="close modal" data-close>✕</button>
                         </header>
-                        <section class="modal-content">MODL LISTO</section>
+                        <section class="modal-content">MODaL LISTO</section>
                         <footer class="modal-footerMODAAL FOOTERfooter>
                       </div>
                     </div>
@@ -238,5 +238,9 @@ function abrir() {
         }
     });
 
+
+}
+
+function redneuronal(){
 
 }
