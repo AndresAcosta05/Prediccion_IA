@@ -225,14 +225,14 @@ async function tablausuarios() {
                     <div class="modal-body">
                     <div class="form-group">
                     <label id = "title" for="exampleFormControlTextarea1">Escribe aqui tu mensaje</label>
-                    <form action=""  id="formulario2"> 
-                    <textarea class="form-control" id="textarea" rows="7"></textarea>
+                    <form action=""  id="lable"> 
+                    <textarea class="form-control" id="mensaje" rows="7"></textarea>
                     </form>
                   </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id = "btncorreo" class="btn btn-primary">Enviar mensaje</button>
+                        <button type="button" onclick = "send()" id = "btncorreo" class="btn btn-primary">Enviar mensaje</button>
                     </div>
                 </div>
             </div>
@@ -288,4 +288,42 @@ async function redneuronal() {
 
 
     }
+}
+
+async function send() {
+    let mensaje = document.getElementById("mensaje").value;
+    await fetch('http://127.0.0.1:5000/get_email_request')
+        .then(res => res.json())
+        .then(response => {
+            for (let x in response) {
+                console.log(response[x][0] + " : " + mensaje)
+            
+            }
+
+        })
+}
+
+async function file(){
+    $('#submit-file').on("click",function(e){
+        e.preventDefault();
+        $('#files').parse({
+            config: {
+                delimiter: "auto",
+                complete: displayHTMLTable,
+            },
+            before: function(file, inputElem)
+            {
+                //console.log("Parsing file...", file);
+            },
+            error: function(err, file)
+            {
+                //console.log("ERROR:", err, file);
+            },
+            complete: function()
+            {
+                //console.log("Done with all files");
+            }
+        });
+    });
+
 }
