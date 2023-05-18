@@ -93,9 +93,14 @@ function validacioncorreo() {
 }
 function borrar() {
     var formulario = document.getElementById("formulario1");
+
     formulario.reset();
 
 
+}
+function borrar2() {
+    var formulario2 = document.getElementById("formulario1");
+    formulario2.reset();
 }
 async function validacioncontactanos() {
     var _document = document.getElementById("NumeroDocumento").value;
@@ -205,7 +210,7 @@ async function tablausuarios() {
                 <div class="col-lg-6">
                 <!-- boton modal 1 -->
                 <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                <img src="https://images.vexels.com/media/users/3/299488/isolated/preview/8c8c1857cbcf222280a12a7f5a122abc-icono-de-tecnologa-a-de-burbujas-de-chat-de-mensaje.png" width="50px">
+                <img src="https://images.vexels.com/media/users/3/299488/isolated/preview/8c8c1857cbcf222280a12a7f5a122abc-icono-de-tecnologa-a-de-burbujas-de-chat-de-mensaje.png" width="30px">
 
                </button>
            </div>
@@ -220,7 +225,9 @@ async function tablausuarios() {
                     <div class="modal-body">
                     <div class="form-group">
                     <label id = "title" for="exampleFormControlTextarea1">Escribe aqui tu mensaje</label>
+                    <form action=""  id="formulario2"> 
                     <textarea class="form-control" id="textarea" rows="7"></textarea>
+                    </form>
                   </div>
 
                     </div>
@@ -238,29 +245,6 @@ async function tablausuarios() {
         })
 }
 
-function abrir() {
-    const openEls = document.querySelectorAll("[data-open]");
-    const isVisible = "is-visible";
-    for (const el of openEls) {
-        el.addEventListener("click", function () {
-            const modalId = this.dataset.open;
-            document.getElementById(modalId).classList.add(isVisible);
-        });
-    }
-    document.addEventListener("click", e => {
-        if (e.target == document.querySelector(".modal.is-visible")) {
-            document.querySelector(".modal.is-visible").classList.remove(isVisible);
-        }
-    });
-
-    document.addEventListener("keyup", e => {
-        if (e.key == "Escape" && document.querySelector(".modal.is-visible")) {
-            document.querySelector(".modal.is-visible").classList.remove(isVisible);
-        }
-    });
-
-
-}
 
 async function redneuronal() {
     let inputcelcius = document.getElementById("inputcelcius").value;
@@ -274,24 +258,34 @@ async function redneuronal() {
         headers: new Headers()
     }
 
-    let data = await fetch('http://127.0.0.1:5000/red_neuronal', fetchData)
-        .then(res => res.json())
-        .then(data => {
-            for (let x in data) {
-                document.getElementById("inputfarenheit").value = data[x];
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Conversion exitosa!',
-                    showConfirmButton: false,
-                    timer: 1500,
-                })
-
-
-            }
-
+    if (inputcelcius == "") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Campos Vacios',
+            footer: '<a href="">Necesitas ayuda?</a>',
 
         })
+    } else {
+
+        let data = await fetch('http://127.0.0.1:5000/red_neuronal', fetchData)
+            .then(res => res.json())
+            .then(data => {
+                for (let x in data) {
+                    document.getElementById("inputfarenheit").value = data[x];
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Conversion exitosa!',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    })
 
 
+                }
 
+
+            })
+
+
+    }
 }
