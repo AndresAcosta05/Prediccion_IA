@@ -199,17 +199,38 @@ async function tablausuarios() {
                 cell1.innerHTML = infoForm.ASUNTO;
 
                 cell8 = filanueva.insertCell(7);
-                cell8.innerHTML = ` <button type="button" onclick = "abrir(this)" class="btn - btn-success" data-open="modal">...</button>
-                    <div class="modal" id="modal">
-                      <div class="modal-dialog">
-                        <header class="modal-header">
-                          <h1 id="title">Respuestas </h1>
-                          <button onclick = "cerrar(this)" class="close-modal" aria-label="close modal" data-close>✕</button>
-                        </header>
-                        <section class="modal-content">MODaL LISTO</section>
-                        <footer class="modal-footerMODAAL FOOTERfooter>
-                      </div>
+                cell8.innerHTML = `   
+         
+        
+                <div class="col-lg-6">
+                <!-- boton modal 1 -->
+                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                <img src="https://images.vexels.com/media/users/3/299488/isolated/preview/8c8c1857cbcf222280a12a7f5a122abc-icono-de-tecnologa-a-de-burbujas-de-chat-de-mensaje.png" width="50px">
+
+               </button>
+           </div>
+
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabe2" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="modal" class="modal-title" id="title">ENVIAR RESPUESTA </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <div class="modal-body">
+                    <div class="form-group">
+                    <label id = "title" for="exampleFormControlTextarea1">Escribe aqui tu mensaje</label>
+                    <textarea class="form-control" id="textarea" rows="7"></textarea>
+                  </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id = "btncorreo" class="btn btn-primary">Enviar mensaje</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
                     
                     `;
             }
