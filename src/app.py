@@ -61,7 +61,6 @@ def Gestion():
 
 
 @app.route('/Redneuronal')
-@login_required
 @cross_origin()
 def Redneuronal():
     return render_template('Redneuronal.html')

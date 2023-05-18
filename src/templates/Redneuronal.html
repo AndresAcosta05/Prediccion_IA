@@ -16,33 +16,35 @@
 <div class="container" id="red">
   <div class="row">
     <div class="col-lg-12 col-sm-12 col-md-12">
-      <h5 id="redneuro" class="display-4">Convertir de Farenheit a Grados Celcius</h5>
+      <h5 id= "redneuro" class="display-4">Convertir de Farenheit a Grados Celcius</h5>
     </div>
   </div>
 </div>
 <div class="container" id="red1">
   <div class="row" id="row">
     <div class="col-lg-4col-sm-4 col-md-4">
-      <label>Tipo</label>
-      <div>
-        <select id="tipo" class="form-select">
-          <option value="">Farenheit</option>
-          <option value="">Celcius</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-lg-4col-sm-4 col-md-4">
       <div>
         <label>Celcius</label>
-        <label id="resultado" for=""></label>
-        <input type="number">
+        <input id = "inputcelcius"type="number">
       </div>
     </div>
-    <div class="col-lg-4col-sm-4 col-md-4">
-      <div>
-        <button class="btn btn-success" id="convertir"> Convertir</button>
-      </div>
-    </div>
-  </div>
 
-  {% endblock%}
+      <div class="col-lg-4col-sm-4 col-md-4">
+        <div>
+          <label>Farenheit  </label>
+          <label id="resultado" for=""></label>
+          <input disabled id = "inputfarenheit"type="number">
+        </div>
+      </div>
+
+
+      <div class="col-lg-4col-sm-4 col-md-4">
+        <div>
+          <button onclick="redneuronal()" class="btn btn-success" id="convertir"> Convertir</button>
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock%} 
