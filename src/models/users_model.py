@@ -1,7 +1,6 @@
 from config import Connection
 from models.entities.users import User
 from models.entities.email import Email_template
-from flask import jsonify
 
 
 class UserModel:
@@ -76,6 +75,20 @@ class UserModel:
                 for request in cursor.fetchall():
                     data.append(request)
                 return data
+            
+        except Exception as ex:
+            print(ex)
+            return False
+    
+    @classmethod
+    def update_email_requests(self, id):
+        try:
+            db = Connection.getConnection()
+            cursor = db.cursor()
+            sql = 'UPDATE user_requests SET status=True WHERE id =%s'% int(id)
+            cursor.execute(sql)
+            db.commit()
+            return True
             
         except Exception as ex:
             print(ex)

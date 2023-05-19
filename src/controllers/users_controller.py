@@ -21,4 +21,9 @@ class UserController:
     def get_email_requests(self):
         response = UserModel.get_email_requests()
         return (response if response else None)
+    
+    @classmethod
+    def update_email_request(self, id):
+        response = UserModel.update_email_requests(id)
+        return (response if response else None)
             
