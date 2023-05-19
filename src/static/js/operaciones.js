@@ -1,3 +1,6 @@
+var ide = ''
+var mail = ''
+
 async function login() {
     let usuario, contraseña;
     usuario = document.getElementById("user").value;
@@ -183,33 +186,31 @@ async function tablausuarios() {
                 cell1 = filanueva.insertCell(0);
                 cell1.innerHTML = infoForm.ID;
 
-                cell1 = filanueva.insertCell(1);
-                cell1.innerHTML = infoForm.CEDULA;
+                cell2 = filanueva.insertCell(1);
+                cell2.innerHTML = infoForm.CEDULA;
 
-                cell1 = filanueva.insertCell(2);
-                cell1.innerHTML = infoForm.NOMBRE;
+                cell3 = filanueva.insertCell(2);
+                cell3.innerHTML = infoForm.NOMBRE;
 
-                cell1 = filanueva.insertCell(3);
-                cell1.innerHTML = infoForm.APELLIDOS;
+                cell4 = filanueva.insertCell(3);
+                cell4.innerHTML = infoForm.APELLIDOS;
+
+                cell5 = filanueva.insertCell(4);
+                cell5.innerHTML = infoForm.NUMEROTELEFONO;
 
 
-                cell1 = filanueva.insertCell(4);
-                cell1.innerHTML = infoForm.NUMEROTELEFONO;
+                cell6 = filanueva.insertCell(5);
+                cell6.innerHTML = infoForm.CORREO;
 
-
-                cell1 = filanueva.insertCell(5);
-                cell1.innerHTML = infoForm.CORREO;
-
-                cell1 = filanueva.insertCell(6);
-                cell1.innerHTML = infoForm.ASUNTO;
+                cell7 = filanueva.insertCell(6);
+                cell7.innerHTML = infoForm.ASUNTO;
 
                 cell8 = filanueva.insertCell(7);
                 cell8.innerHTML = `   
          
-        
                 <div class="col-lg-6">
                 <!-- boton modal 1 -->
-                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                <button type="button" class="btn" onclick = "asign('${infoForm["ID"]}','${infoForm["CORREO"]}')"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
                 <img src="https://images.vexels.com/media/users/3/299488/isolated/preview/8c8c1857cbcf222280a12a7f5a122abc-icono-de-tecnologa-a-de-burbujas-de-chat-de-mensaje.png" width="30px">
 
                </button>
@@ -229,17 +230,13 @@ async function tablausuarios() {
                     <textarea class="form-control" id="mensaje" rows="7"></textarea>
                     </form>
                   </div>
-
                     </div>
                     <div class="modal-footer">
-                        <button type="button" onclick = "send()" id = "btncorreo" class="btn btn-primary">Enviar mensaje</button>
+                        <button type="button" onclick= "send()"  id = "btncorreo" class="btn btn-primary">Enviar mensaje</button>
                     </div>
                 </div>
             </div>
-        </div>
-
-                    
-                    `;
+        </div>`;
             }
 
         })
@@ -290,40 +287,13 @@ async function redneuronal() {
     }
 }
 
-async function send() {
-    let mensaje = document.getElementById("mensaje").value;
-    await fetch('http://127.0.0.1:5000/get_email_request')
-        .then(res => res.json())
-        .then(response => {
-            for (let x in response) {
-                console.log(response[x][0] + " : " + mensaje)
-            
-            }
-
-        })
+function asign(id,correo) {
+    ide =id;
+    mail = correo; 
 }
 
-async function file(){
-    $('#submit-file').on("click",function(e){
-        e.preventDefault();
-        $('#files').parse({
-            config: {
-                delimiter: "auto",
-                complete: displayHTMLTable,
-            },
-            before: function(file, inputElem)
-            {
-                //console.log("Parsing file...", file);
-            },
-            error: function(err, file)
-            {
-                //console.log("ERROR:", err, file);
-            },
-            complete: function()
-            {
-                //console.log("Done with all files");
-            }
-        });
-    });
-
+ function send(){
+    mensaje = document.getElementById("mensaje").value;
+    console.log(ide + mail + mensaje)
 }
+
