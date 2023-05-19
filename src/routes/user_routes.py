@@ -35,3 +35,17 @@ def send_email_request():
 def get_email_request():
     response = UserController.get_email_requests()
     return response
+
+@users.route('/update_email_request', methods=['POST'])
+@cross_origin()
+def update_email_request():
+    if request.method == 'POST':
+        id = request.form['id']
+        email = request.form['email']
+        answer = request.form['answer']
+        response = UserController.update_email_request(id)
+        if response:
+            Email_template().send_Email(email, 'Respuesta a la solicitud', None, answer)
+            return jsonify(True)
+        else:
+            return jsonify(False)
