@@ -1,3 +1,6 @@
+var ide = ''
+var mail = ''
+let chart;
 async function login() {
     let usuario, contraseña;
     usuario = document.getElementById("user").value;
@@ -74,7 +77,6 @@ async function login() {
             })
     }
 }
-
 function validacioncorreo() {
     var emailField = document.getElementById('Correo');
     var validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
@@ -183,33 +185,31 @@ async function tablausuarios() {
                 cell1 = filanueva.insertCell(0);
                 cell1.innerHTML = infoForm.ID;
 
-                cell1 = filanueva.insertCell(1);
-                cell1.innerHTML = infoForm.CEDULA;
+                cell2 = filanueva.insertCell(1);
+                cell2.innerHTML = infoForm.CEDULA;
 
-                cell1 = filanueva.insertCell(2);
-                cell1.innerHTML = infoForm.NOMBRE;
+                cell3 = filanueva.insertCell(2);
+                cell3.innerHTML = infoForm.NOMBRE;
 
-                cell1 = filanueva.insertCell(3);
-                cell1.innerHTML = infoForm.APELLIDOS;
+                cell4 = filanueva.insertCell(3);
+                cell4.innerHTML = infoForm.APELLIDOS;
+
+                cell5 = filanueva.insertCell(4);
+                cell5.innerHTML = infoForm.NUMEROTELEFONO;
 
 
-                cell1 = filanueva.insertCell(4);
-                cell1.innerHTML = infoForm.NUMEROTELEFONO;
+                cell6 = filanueva.insertCell(5);
+                cell6.innerHTML = infoForm.CORREO;
 
-
-                cell1 = filanueva.insertCell(5);
-                cell1.innerHTML = infoForm.CORREO;
-
-                cell1 = filanueva.insertCell(6);
-                cell1.innerHTML = infoForm.ASUNTO;
+                cell7 = filanueva.insertCell(6);
+                cell7.innerHTML = infoForm.ASUNTO;
 
                 cell8 = filanueva.insertCell(7);
                 cell8.innerHTML = `   
          
-        
                 <div class="col-lg-6">
                 <!-- boton modal 1 -->
-                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                <button type="button" class="btn" onclick = "asign('${infoForm["ID"]}','${infoForm["CORREO"]}')"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
                 <img src="https://images.vexels.com/media/users/3/299488/isolated/preview/8c8c1857cbcf222280a12a7f5a122abc-icono-de-tecnologa-a-de-burbujas-de-chat-de-mensaje.png" width="30px">
 
                </button>
@@ -225,26 +225,21 @@ async function tablausuarios() {
                     <div class="modal-body">
                     <div class="form-group">
                     <label id = "title" for="exampleFormControlTextarea1">Escribe aqui tu mensaje</label>
-                    <form action=""  id="formulario2"> 
-                    <textarea class="form-control" id="textarea" rows="7"></textarea>
+                    <form action=""  id="lable"> 
+                    <textarea class="form-control" id="mensaje" rows="7"></textarea>
                     </form>
                   </div>
-
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id = "btncorreo" class="btn btn-primary">Enviar mensaje</button>
+                        <button type="button" onclick= "send()"  id = "btncorreo" class="btn btn-primary">Enviar mensaje</button>
                     </div>
                 </div>
             </div>
-        </div>
-
-                    
-                    `;
+        </div>`;
             }
 
         })
 }
-
 
 async function redneuronal() {
     let inputcelcius = document.getElementById("inputcelcius").value;
@@ -279,13 +274,308 @@ async function redneuronal() {
                         showConfirmButton: false,
                         timer: 1500,
                     })
-
-
                 }
-
-
             })
 
 
     }
+}
+
+function asign(id, correo) {
+    ide = id;
+    mail = correo;
+}
+
+async function send() {
+    mensaje = document.getElementById("mensaje").value;
+    var info = new FormData()
+
+    info.append('id', ide)
+    info.append('email', mail)
+    info.append('answer', mensaje)
+
+    let fetchData = {
+        method: 'POST',
+        body: info,
+        headers: new Headers()
+    }
+
+    if (mensaje == "") {
+        alert("campo vacio")
+    } else {
+
+        let data = await fetch('http://127.0.0.1:5000/update_email_request', fetchData)
+            .then(res => res.json())
+            .then(data => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Respuesta Enviada',
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+            })
+
+    }
+
+}
+
+async function cargar() {
+
+    let cmbtipo = document.getElementById("cmbgraficos").value;
+    let formData = new FormData();
+    formData.append("file", fileupload.files[0]);
+
+
+    if (fileupload.value == "") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Por favor Seleccione un archivo',
+            footer: '<a href="">Necesitas ayuda?</a>',
+
+        })
+    } else {
+        await fetch('http://127.0.0.1:5000/prediccion', { method: "POST", body: formData })
+            .then(res => res.json())
+            .then(data => {
+                switch (cmbtipo) {
+                    case '0':
+                        graphline(data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Prediccion Enviada',
+                            timer: 3500,
+                        })
+
+                        break;
+                    case '1':
+                        graphpie(data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Prediccion Enviada',
+                            timer: 3500,
+                        })
+                        break;
+                    case '2':
+                        graphbar(data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Prediccion Enviada',
+                            timer: 3500,
+                        })
+                        break;
+                    case '3':
+                        graphburble(data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Prediccion Enviada',
+                            timer: 3500,
+                        })
+                        break;
+                    default:
+                        break;
+                }
+
+
+
+
+            })
+    }
+
+}
+
+function colorize(opaque, hover, ctx) {
+    const v = ctx.parsed;
+    const c = v < -50 ? '#D60000'
+        : v < 0 ? '#F46300'
+            : v < 50 ? '#0358B6'
+                : '#44DE28';
+
+    const opacity = hover ? 1 - Math.abs(v / 150) - 0.2 : 1 - Math.abs(v / 150);
+
+    return opaque ? c : Utils.transparentize(c, opacity);
+}
+
+function hoverColorize(ctx) {
+    return colorize(false, true, ctx);
+}
+
+function graphpie(data) {
+
+    const labels = data.map(function (e) {
+        return Math.round(e.X2);
+    });
+
+
+    const datacalefaccion = data.map(function (e) {
+        return +e.Calefaccion;
+    });
+
+    const dataRefrigeracion = data.map(function (e) {
+        return +e.Refrigeracion;
+    });
+
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+
+    const config = {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Calefaccion',
+                data: datacalefaccion,
+                backgroundColor: 'rgba(0, 119, 204, 0.3)'
+            },
+            {
+                label: 'Refrigeracion',
+                data: dataRefrigeracion,
+                backgroundColor: 'rgba(230, 119, 204, 0.3)'
+            }]
+        },
+        elements: {
+            arc: {
+                backgroundColor: colorize.bind(null, false, false),
+                hoverBackgroundColor: hoverColorize
+            },
+
+            plugins: {
+                legend: false,
+                tooltip: false,
+            },
+        }
+    }
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, config);
+
+}
+
+function graphline(data) {
+    const labels = data.map(function (e) {
+        return Math.round(e.X2);
+    });
+
+
+    const datacalefaccion = data.map(function (e) {
+        return +e.Calefaccion;
+    });
+
+    const dataRefrigeracion = data.map(function (e) {
+        return +e.Refrigeracion;
+    });
+
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const config = {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Calefaccion',
+                data: datacalefaccion,
+                backgroundColor: 'rgba(0, 119, 204, 0.3)'
+            },
+            {
+                label: 'Refrigeracion',
+                data: dataRefrigeracion,
+                backgroundColor: 'rgba(230, 119, 204, 0.3)'
+            }]
+        }
+    };
+
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, config);
+
+}
+
+function graphbar(data) {
+    const labels = data.map(function (e) {
+        return Math.round(e.X2);
+    });
+
+
+    const datacalefaccion = data.map(function (e) {
+        return +e.Calefaccion;
+    });
+
+    const dataRefrigeracion = data.map(function (e) {
+        return +e.Refrigeracion;
+    });
+
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const config = {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Calefaccion',
+                data: datacalefaccion,
+                backgroundColor: 'rgba(0, 119, 204, 0.3)'
+            },
+            {
+                label: 'Refrigeracion',
+                data: dataRefrigeracion,
+                backgroundColor: 'rgba(230, 119, 204, 0.3)'
+            }]
+        }
+    };
+
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, config);
+
+}
+
+function graphburble(data) {
+
+    const labels = data.map(function (e) {
+        return Math.round(e.X2);
+    });
+
+
+    const datacalefaccion = data.map(function (e) {
+        return +e.Calefaccion;
+    });
+
+    const dataRefrigeracion = data.map(function (e) {
+        return +e.Refrigeracion;
+    });
+
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+
+    const config = {
+        type: 'bubble',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Calefaccion',
+                data: datacalefaccion,
+                backgroundColor: 'rgba(0, 119, 204, 0.3)'
+            },
+            {
+                label: 'Refrigeracion',
+                data: dataRefrigeracion,
+                backgroundColor: 'rgba(230, 119, 204, 0.3)'
+            }]
+        },
+        elements: {
+            arc: {
+                backgroundColor: colorize.bind(null, false, false),
+                hoverBackgroundColor: hoverColorize
+            },
+
+            plugins: {
+                legend: false,
+                tooltip: false,
+            },
+        }
+    }
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, config);
+
 }
