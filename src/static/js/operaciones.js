@@ -1,6 +1,6 @@
 var ide = ''
 var mail = ''
-
+let chart;
 async function login() {
     let usuario, contraseña;
     usuario = document.getElementById("user").value;
@@ -77,7 +77,6 @@ async function login() {
             })
     }
 }
-
 function validacioncorreo() {
     var emailField = document.getElementById('Correo');
     var validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
@@ -242,7 +241,6 @@ async function tablausuarios() {
         })
 }
 
-
 async function redneuronal() {
     let inputcelcius = document.getElementById("inputcelcius").value;
 
@@ -322,86 +320,69 @@ async function send() {
 }
 
 async function cargar() {
+
+    let cmbtipo = document.getElementById("cmbgraficos").value;
     let formData = new FormData();
     formData.append("file", fileupload.files[0]);
-    await fetch('http://127.0.0.1:5000/prediccion', { method: "POST", body: formData })
-        .then(res => res.json())
-        .then(data => {
-            const labels = data.map(function (e) {
-                return Math.round(e.Puntaje);
-            });
 
 
-            const datacalefaccion = data.map(function (e) {
-                return +e.Calefaccion;
-            });
+    if (fileupload.value == "") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Por favor Seleccione un archivo',
+            footer: '<a href="">Necesitas ayuda?</a>',
 
-            const dataRefrigeracion = data.map(function (e) {
-                return +e.Refrigeracion;
-            });
+        })
+    } else {
+        await fetch('http://127.0.0.1:5000/prediccion', { method: "POST", body: formData })
+            .then(res => res.json())
+            .then(data => {
+                switch (cmbtipo) {
+                    case '0':
+                        graphline(data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Prediccion Enviada',
+                            timer: 3500,
+                        })
 
-            const canvas = document.querySelector('canvas');
-            const ctx = canvas.getContext('2d');
-
-
-            const config = {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Calefaccion',
-                        data: datacalefaccion,
-                        backgroundColor: 'rgba(0, 119, 204, 0.3)'
-                    },
-                    {
-                        label: 'Refrigeracion',
-                        data: dataRefrigeracion,
-                        backgroundColor: 'rgba(230, 119, 204, 0.3)'
-                    }]
+                        break;
+                    case '1':
+                        graphpie(data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Prediccion Enviada',
+                            timer: 3500,
+                        })
+                        break;
+                    case '2':
+                        graphbar(data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Prediccion Enviada',
+                            timer: 3500,
+                        })
+                        break;
+                    case '3':
+                        graphburble(data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Prediccion Enviada',
+                            timer: 3500,
+                        })
+                        break;
+                    default:
+                        break;
                 }
-            };
-    
-/* 
-            const config = {
-                type: 'pie',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Calefaccion',
-                        data: datacalefaccion,
-                        backgroundColor: 'rgba(0, 119, 204, 0.3)'
-                    },
-                    {
-                        label: 'Refrigeracion',
-                        data: dataRefrigeracion,
-                        backgroundColor: 'rgba(230, 119, 204, 0.3)'
-                    }]
-                },
-                elements: {
-                    arc: {
-                        backgroundColor: colorize.bind(null, false, false),
-                        hoverBackgroundColor: hoverColorize
-                    },
 
-                    plugins: {
-                        legend: false,
-                        tooltip: false,
-                    },
-                }
-            };
 
-            const chart = new Chart(ctx, config);
- */
-            alert('You have successfully upload the file!');
-        }
-        )
+
+
+            })
+    }
+
 }
-
-
-
-
-
-
 
 function colorize(opaque, hover, ctx) {
     const v = ctx.parsed;
@@ -417,4 +398,184 @@ function colorize(opaque, hover, ctx) {
 
 function hoverColorize(ctx) {
     return colorize(false, true, ctx);
+}
+
+function graphpie(data) {
+
+    const labels = data.map(function (e) {
+        return Math.round(e.X2);
+    });
+
+
+    const datacalefaccion = data.map(function (e) {
+        return +e.Calefaccion;
+    });
+
+    const dataRefrigeracion = data.map(function (e) {
+        return +e.Refrigeracion;
+    });
+
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+
+    const config = {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Calefaccion',
+                data: datacalefaccion,
+                backgroundColor: 'rgba(0, 119, 204, 0.3)'
+            },
+            {
+                label: 'Refrigeracion',
+                data: dataRefrigeracion,
+                backgroundColor: 'rgba(230, 119, 204, 0.3)'
+            }]
+        },
+        elements: {
+            arc: {
+                backgroundColor: colorize.bind(null, false, false),
+                hoverBackgroundColor: hoverColorize
+            },
+
+            plugins: {
+                legend: false,
+                tooltip: false,
+            },
+        }
+    }
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, config);
+
+}
+
+function graphline(data) {
+    const labels = data.map(function (e) {
+        return Math.round(e.X2);
+    });
+
+
+    const datacalefaccion = data.map(function (e) {
+        return +e.Calefaccion;
+    });
+
+    const dataRefrigeracion = data.map(function (e) {
+        return +e.Refrigeracion;
+    });
+
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const config = {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Calefaccion',
+                data: datacalefaccion,
+                backgroundColor: 'rgba(0, 119, 204, 0.3)'
+            },
+            {
+                label: 'Refrigeracion',
+                data: dataRefrigeracion,
+                backgroundColor: 'rgba(230, 119, 204, 0.3)'
+            }]
+        }
+    };
+
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, config);
+
+}
+
+function graphbar(data) {
+    const labels = data.map(function (e) {
+        return Math.round(e.X2);
+    });
+
+
+    const datacalefaccion = data.map(function (e) {
+        return +e.Calefaccion;
+    });
+
+    const dataRefrigeracion = data.map(function (e) {
+        return +e.Refrigeracion;
+    });
+
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const config = {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Calefaccion',
+                data: datacalefaccion,
+                backgroundColor: 'rgba(0, 119, 204, 0.3)'
+            },
+            {
+                label: 'Refrigeracion',
+                data: dataRefrigeracion,
+                backgroundColor: 'rgba(230, 119, 204, 0.3)'
+            }]
+        }
+    };
+
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, config);
+
+}
+
+function graphburble(data) {
+
+    const labels = data.map(function (e) {
+        return Math.round(e.X2);
+    });
+
+
+    const datacalefaccion = data.map(function (e) {
+        return +e.Calefaccion;
+    });
+
+    const dataRefrigeracion = data.map(function (e) {
+        return +e.Refrigeracion;
+    });
+
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+
+    const config = {
+        type: 'bubble',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Calefaccion',
+                data: datacalefaccion,
+                backgroundColor: 'rgba(0, 119, 204, 0.3)'
+            },
+            {
+                label: 'Refrigeracion',
+                data: dataRefrigeracion,
+                backgroundColor: 'rgba(230, 119, 204, 0.3)'
+            }]
+        },
+        elements: {
+            arc: {
+                backgroundColor: colorize.bind(null, false, false),
+                hoverBackgroundColor: hoverColorize
+            },
+
+            plugins: {
+                legend: false,
+                tooltip: false,
+            },
+        }
+    }
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, config);
+
 }
