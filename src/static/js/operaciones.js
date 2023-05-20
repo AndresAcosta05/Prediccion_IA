@@ -276,24 +276,62 @@ async function redneuronal() {
                         showConfirmButton: false,
                         timer: 1500,
                     })
-
-
                 }
-
-
             })
 
 
     }
 }
 
-function asign(id,correo) {
-    ide =id;
-    mail = correo; 
+function asign(id, correo) {
+    ide = id;
+    mail = correo;
 }
 
- function send(){
+async function send() {
     mensaje = document.getElementById("mensaje").value;
-    console.log(ide + mail + mensaje)
+
+    var info = new FormData()
+
+    info.append('id', ide)
+    info.append('email', mail)
+    info.append('answer', mensaje)
+
+    let fetchData = {
+        method: 'POST',
+        body: info,
+        headers: new Headers()
+    }
+
+    if (mensaje == "") {
+        alert("campo vacio")
+    } else {
+
+        let data = await fetch('http://127.0.0.1:5000/update_email_request', fetchData)
+            .then(res => res.json())
+            .then(data => {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Respuesta Enviada',
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+
+
+
+            })
+
+    }
+
 }
 
+async function cargar() {
+    const fileInput = document.getElementById('files');
+    fileInput.onchange = () => {
+        const selectedFile = fileInput.files[0];
+        console.log(selectedFile);
+    }
+
+
+}
