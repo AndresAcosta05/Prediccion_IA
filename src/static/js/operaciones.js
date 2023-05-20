@@ -290,7 +290,6 @@ function asign(id, correo) {
 
 async function send() {
     mensaje = document.getElementById("mensaje").value;
-
     var info = new FormData()
 
     info.append('id', ide)
@@ -310,16 +309,12 @@ async function send() {
         let data = await fetch('http://127.0.0.1:5000/update_email_request', fetchData)
             .then(res => res.json())
             .then(data => {
-
                 Swal.fire({
                     icon: 'success',
                     title: 'Respuesta Enviada',
                     showConfirmButton: false,
                     timer: 1500,
                 })
-
-
-
             })
 
     }
@@ -327,11 +322,99 @@ async function send() {
 }
 
 async function cargar() {
-    const fileInput = document.getElementById('files');
-    fileInput.onchange = () => {
-        const selectedFile = fileInput.files[0];
-        console.log(selectedFile);
-    }
+    let formData = new FormData();
+    formData.append("file", fileupload.files[0]);
+    await fetch('http://127.0.0.1:5000/prediccion', { method: "POST", body: formData })
+        .then(res => res.json())
+        .then(data => {
+            const labels = data.map(function (e) {
+                return Math.round(e.Puntaje);
+            });
 
 
+            const datacalefaccion = data.map(function (e) {
+                return +e.Calefaccion;
+            });
+
+            const dataRefrigeracion = data.map(function (e) {
+                return +e.Refrigeracion;
+            });
+
+            const canvas = document.querySelector('canvas');
+            const ctx = canvas.getContext('2d');
+
+
+            const config = {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Calefaccion',
+                        data: datacalefaccion,
+                        backgroundColor: 'rgba(0, 119, 204, 0.3)'
+                    },
+                    {
+                        label: 'Refrigeracion',
+                        data: dataRefrigeracion,
+                        backgroundColor: 'rgba(230, 119, 204, 0.3)'
+                    }]
+                }
+            };
+    
+/* 
+            const config = {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Calefaccion',
+                        data: datacalefaccion,
+                        backgroundColor: 'rgba(0, 119, 204, 0.3)'
+                    },
+                    {
+                        label: 'Refrigeracion',
+                        data: dataRefrigeracion,
+                        backgroundColor: 'rgba(230, 119, 204, 0.3)'
+                    }]
+                },
+                elements: {
+                    arc: {
+                        backgroundColor: colorize.bind(null, false, false),
+                        hoverBackgroundColor: hoverColorize
+                    },
+
+                    plugins: {
+                        legend: false,
+                        tooltip: false,
+                    },
+                }
+            };
+
+            const chart = new Chart(ctx, config);
+ */
+            alert('You have successfully upload the file!');
+        }
+        )
+}
+
+
+
+
+
+
+
+function colorize(opaque, hover, ctx) {
+    const v = ctx.parsed;
+    const c = v < -50 ? '#D60000'
+        : v < 0 ? '#F46300'
+            : v < 50 ? '#0358B6'
+                : '#44DE28';
+
+    const opacity = hover ? 1 - Math.abs(v / 150) - 0.2 : 1 - Math.abs(v / 150);
+
+    return opaque ? c : Utils.transparentize(c, opacity);
+}
+
+function hoverColorize(ctx) {
+    return colorize(false, true, ctx);
 }
