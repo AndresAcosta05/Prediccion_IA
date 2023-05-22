@@ -9,7 +9,7 @@ class PDF(FPDF):
 
     def header(self):
         fecha = datetime.date.today()
-        self.image(os.getcwd()+'/static/img/logo.png', x = 10, y = 10, w = 30, h = 30)
+        self.image(os.getcwd()+'/src/static/img/logo.png', x = 10, y = 10, w = 30, h = 30)
 
         self.set_font('Arial', '', 15)
 
