@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from flask_cors import cross_origin
+from file_pdf import PDF
 # librerias de la red neuronal
 import tensorflow as tf
 import numpy as np
@@ -36,6 +37,7 @@ def red_neuronal():
 
 @machine_learning.route('/prediccion', methods=['POST'])
 @cross_origin()
+@login_required
 def prediccion():
     if request.method == 'POST':
         file = request.files['file']
@@ -78,3 +80,11 @@ def prediccion():
             })
             count += 1
         return jsonify(predicts)
+
+
+@machine_learning.route('/ReportePDF')
+@cross_origin()
+@login_required
+def ReportePDF():
+    pdf = PDF.generar()
+    return pdf
