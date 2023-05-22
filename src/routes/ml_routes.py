@@ -59,9 +59,16 @@ def prediccion():
         x6  = list(X_test['X6'])
         x7  = list(X_test['X7'])
         x8  = list(X_test['X8'])
-
+        
+       
+        y1 =list(y_test['Y1'])
+        y2=list(y_test['Y2'])
+        reales=[]   
+        count2= 0
         predicts = []
+        
         count = 0
+      
         for pred in y_pred:
             predicts.append({
                 'X1': x1[count],
@@ -78,3 +85,14 @@ def prediccion():
             })
             count += 1
         return jsonify(predicts)
+    for real in y_test:
+            reales.append({
+                'Y1':y1[count2],
+                'Y2':y2[count2],
+                'Calefacion2':float(real[0]),
+                'Refrigeracion2':float(real[1])
+                
+            })
+            count2+=1
+    return jsonify(reales)
+    
