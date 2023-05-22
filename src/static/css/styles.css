@@ -148,3 +148,8 @@ color: black;
 #upload{
     padding-top: 3%;
 }
+
+#logo{
+    background-color: white;
+    border-radius:  50%;
+}
